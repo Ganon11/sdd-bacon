@@ -33,6 +33,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import java.io.*;
+
 public class ComicStrip {
 	private Image comicStripImage;		// The actual Image of the comic strip.
 	
