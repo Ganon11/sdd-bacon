@@ -215,7 +215,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
         // Displays a window with the license text and a link to the Google code
         // site.
-        new AboutFrame().display();
+        new AboutFrame().setVisible(true);
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
