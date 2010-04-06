@@ -57,13 +57,20 @@ import javax.imageio.ImageIO;
 	/**
 	 * Loads the file specified by DATA_FILE, and reads in the list of
 	 * ComicSites and ComicStrips.
+	 *
+	 * WARNING: Calling this method clears the list of comics in order to load
+	 * the new list!
 	 */
 	public void loadDatabase() {
+		allComics.clear();
 	}
 	
 	/**
 	 * Saves the current list of ComicSites to the data file specified by
 	 * DATA_FILE.
+	 *
+	 * WARNING: Calling this method clears the list of comics in order to load
+	 * the new list!
 	 *
 	 * @param newComics List of currently loaded/displayed ComicSites and ComicStrips.
 	 */
