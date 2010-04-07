@@ -30,11 +30,13 @@ package BACON;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
  
  public class ComicDatabase {
-	private final DATA_FILE;
+	private final String DATA_FILE;
 	private List<ComicSite> allComics;
 	
 	/**
