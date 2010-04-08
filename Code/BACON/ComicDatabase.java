@@ -32,8 +32,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.imageio.ImageIO;
+import java.util.Scanner;
  
  public class ComicDatabase {
 	private final String DATA_FILE;
@@ -65,6 +64,30 @@ import javax.imageio.ImageIO;
 	 */
 	public void loadDatabase() {
 		allComics.clear();
+		Scanner dataFile = new Scanner(DATA_FILE);
+		while (dataFile.hasNextLine()) {
+			// The Data File consists of the Comic Title, Author, and Image
+			// File Path on seperate lines.  Each set of information is, in
+			// turn, seperated by a blank line.
+			ComicSite comic;
+			ComicStrip strip;
+			String titleLine = dataFile.nextLine();
+			String authorLine = dataFile.nextLine();
+			String fileLine = dataFile.nextLine();
+			// If this was the last entry, there may not be a blank line
+			// following it.
+			if (dataFile.hasNextLine()) {
+				dataFile.nextLine();
+			}
+			
+			String title = titleLine.substring(12);
+			String author = authorLine.substring(14);
+			String filePath = fileLine.substring(12);
+			strip = new ComicStrip(filePath);
+			comic = new ComicSite(title, author);
+			comic.setStrip(strip);
+			allComics.add(comic);
+		}
 	}
 	
 	/**
@@ -86,6 +109,20 @@ import javax.imageio.ImageIO;
 	 * DATA_FILE.
 	 */
 	private void saveDatabase() {
+		try {
+			FileWriter dataFile = new FileWriter(DATA_FILE);
+			for (ComicSite comic : allComics) {
+				ComicStrip strip = comic.getStrip();
+				dataFile.write("Comic Name: " + comic.getTitle() + "\n");
+				dataFile.write("Comic Author: " + comic.getAuthor() + "\n");
+				String pathline = "Image Path: " + strip.getFilepath();
+				dataFile.write(pathline + "\n\n");
+			}
+			dataFile.close();
+		} catch (IOException e) {
+			// Handle the IOException here - display an error frame, print
+			// a message the STDERR, whatev.
+		}
 	}
 	
 	/**
