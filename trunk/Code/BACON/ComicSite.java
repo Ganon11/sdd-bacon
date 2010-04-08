@@ -28,7 +28,7 @@
 package BACON;
  
 public class ComicSite {
-	private ComicStrip 	currentStrip;	// The current Comic Image.
+	private ComicStrip currentStrip;	// The current Comic Image.
 	private String comicName;	// The name of the Web Comic.
 	private String comicAuthor;	// The author of the Web Comic.
 	
@@ -41,5 +41,41 @@ public class ComicSite {
 	public ComicSite(String name, String author) {
 		comicName = name;
 		comicAuthor = author;
+	}
+	
+	/**
+	 * Updates the ComicSite's current strip.
+	 *
+	 * @param newStrip The new ComicStrip object.
+	 */
+	public void setStrip(ComicStrip newStrip) {
+		currentStrip = newStrip;
+	}
+	
+	/**
+	 * Accessor method for the ComicStrip object.
+	 *
+	 * @return The current ComicStrip object.
+	 */
+	public ComicStrip getStrip() {
+		return currentStrip;
+	}
+	
+	/**
+	 * Accessor method for the Author's name.
+	 *
+	 * @return The author's name as a String.
+	 */
+	public String getAuthor() {
+		return comicAuthor;
+	}
+	
+	/**
+	 * Accessor method for the comic's title.
+	 *
+	 * @return The Webcomic's title as a String.
+	 */
+	public String getTitle() {
+		return comicName;
 	}
 }
