@@ -1,0 +1,7 @@
+Comic Name: Ctrl-Alt-Del
+Comic Author: Tim Buckley
+Image Path: C:\Users\starkm3\Pictures\Comics\CAD.jpg
+
+Comic Name: 8-Bit Theater
+Comic Author: Brian Clevinger
+Image Path: C:\Users\starkm3\Pictures\Comics\8Bit.png
