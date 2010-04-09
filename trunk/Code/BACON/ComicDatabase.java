@@ -94,7 +94,7 @@ import java.util.Scanner;
 	 * Saves the current list of ComicSites to the data file specified by
 	 * DATA_FILE.
 	 *
-	 * WARNING: Calling this method clears the list of comics in order to load
+	 * WARNING: Calling this method clears the list of comics in order to save
 	 * the new list!
 	 *
 	 * @param newComics List of currently loaded/displayed ComicSites and ComicStrips.
