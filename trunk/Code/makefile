@@ -1,0 +1,2 @@
+BACON:
+	javac BACON/*.java
