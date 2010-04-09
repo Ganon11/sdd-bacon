@@ -34,7 +34,7 @@ public class ComicSite {
 	private String comicUrl; //The URL of the comic site.
 	
 	/**
-	 * Constructs a ComicSite object with the correct name/author.
+	 * Constructs a ComicSite object with the correct name, author, and URL.
 	 *
 	 * @param name	The Webcomic Name, such as "Ctrl-Alt-Del"
 	 * @param author	The Webcomic Author's name.
@@ -47,7 +47,7 @@ public class ComicSite {
 	}
 	
 	/**
-	 * Constructs a ComicSite object with the correct name/author.
+	 * Constructs a ComicSite object with the correct name and URL.
 	 *
 	 * @param name	The Webcomic Name, such as "Ctrl-Alt-Del"
 	 * @param url	The Webcomic's site URL, such as "http://www.cad-comic.com"
@@ -55,6 +55,7 @@ public class ComicSite {
 	public ComicSite(String name, String url) {
 		comicName = name;
 		comicUrl = url;
+		comicAuthor = "";
 	}
 	
 	/**
