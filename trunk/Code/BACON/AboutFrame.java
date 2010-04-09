@@ -1,11 +1,14 @@
-/*
- * BACON
+/**
+ * BACON (sdd.bacon@gmail.com)
  *
  * AboutFrame - This class displays a small window that gives a summary
  *   of the project and of the GPL.
  *
  * Copyright (c) 2010
- * sdd.bacon@google.com
+ * @author David Pizzuto, Seamus Reynolds, Matt Schoen, Michael Stark
+ * All Rights Reserved
+ *
+ * @version 0.1, 04/02/10
  *
  * http://code.google.com/p/bacon/
  *
