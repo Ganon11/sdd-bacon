@@ -29,7 +29,7 @@ package BACON;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
