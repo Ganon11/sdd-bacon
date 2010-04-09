@@ -45,8 +45,9 @@ public class MainFrame extends javax.swing.JFrame {
         mainComicPanel = new javax.swing.JPanel();
         prevButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
-        comicPanel = new javax.swing.JPanel();
         aboutButton = new javax.swing.JButton();
+        comicPane = new javax.swing.JScrollPane();
+        comicDataLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         preferencesMenuItem = new javax.swing.JMenuItem();
@@ -75,17 +76,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout comicPanelLayout = new javax.swing.GroupLayout(comicPanel);
-        comicPanel.setLayout(comicPanelLayout);
-        comicPanelLayout.setHorizontalGroup(
-            comicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 245, Short.MAX_VALUE)
-        );
-        comicPanelLayout.setVerticalGroup(
-            comicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 204, Short.MAX_VALUE)
-        );
-
         aboutButton.setText("About");
         aboutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,30 +83,31 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        comicPane.setViewportView(comicDataLabel);
+
         javax.swing.GroupLayout mainComicPanelLayout = new javax.swing.GroupLayout(mainComicPanel);
         mainComicPanel.setLayout(mainComicPanelLayout);
         mainComicPanelLayout.setHorizontalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainComicPanelLayout.createSequentialGroup()
-                .addGroup(mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainComicPanelLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(prevButton)
-                        .addGap(73, 73, 73)
-                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addComponent(aboutButton))
-                    .addGroup(mainComicPanelLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(comicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(92, 92, 92)
+                .addComponent(prevButton)
+                .addGap(73, 73, 73)
+                .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(aboutButton)
                 .addContainerGap())
+            .addGroup(mainComicPanelLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                .addGap(74, 74, 74))
         );
         mainComicPanelLayout.setVerticalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainComicPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(comicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(comicPane, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nextButton)
                     .addComponent(prevButton)
@@ -258,7 +249,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton aboutButton;
     private javax.swing.JMenuItem addWebcomicMenuItem;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JPanel comicPanel;
+    private javax.swing.JLabel comicDataLabel;
+    private javax.swing.JScrollPane comicPane;
     private javax.swing.JMenuItem editComicMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
