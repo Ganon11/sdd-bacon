@@ -30,7 +30,7 @@ package BACON;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 
@@ -74,6 +74,7 @@ public class ComicStrip {
 		try {
 			comicStripImage = ImageIO.read(new File(filepath));
 		} catch (IOException e) {
+			System.err.println("Could not load the image from the specified file path: " + filepath);
 			// Here, we should handle the exception - maybe display an error
 			// message like "Could not load file fileName".
 		}

@@ -31,16 +31,30 @@ public class ComicSite {
 	private ComicStrip currentStrip;	// The current Comic Image.
 	private String comicName;	// The name of the Web Comic.
 	private String comicAuthor;	// The author of the Web Comic.
+	private String comicUrl; //The URL of the comic site.
 	
 	/**
 	 * Constructs a ComicSite object with the correct name/author.
 	 *
 	 * @param name	The Webcomic Name, such as "Ctrl-Alt-Del"
 	 * @param author	The Webcomic Author's name.
+	 * @param url	The Webcomic's site URL, such as "http://www.cad-comic.com"
 	 */
-	public ComicSite(String name, String author) {
+	public ComicSite(String name, String author, String url) {
 		comicName = name;
 		comicAuthor = author;
+		comicUrl = url;
+	}
+	
+	/**
+	 * Constructs a ComicSite object with the correct name/author.
+	 *
+	 * @param name	The Webcomic Name, such as "Ctrl-Alt-Del"
+	 * @param url	The Webcomic's site URL, such as "http://www.cad-comic.com"
+	 */	
+	public ComicSite(String name, String url) {
+		comicName = name;
+		comicUrl = url;
 	}
 	
 	/**
@@ -68,6 +82,15 @@ public class ComicSite {
 	 */
 	public String getAuthor() {
 		return comicAuthor;
+	}
+	
+	/**
+	 * Accessor method for the Webcomic's URL.
+	 *
+	 * @return The URL as a String.
+	 */
+	public String getUrl() {
+		return comicUrl;
 	}
 	
 	/**
