@@ -28,6 +28,7 @@
 package BACON;
  
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -51,21 +52,16 @@ import java.util.Set;
 	 * Map.
 	 */
 	public void loadPreferences() {
-		try {
-			Scanner prefFile = new Scanner(PREF_FILENAME);
-			while (prefFile.hasNextLine()) {
-				String line = prefFile.nextLine();
-				// Each line consists of KEY_NAME = VALUE, so splitting on " "
-				// will make elements[0] the key, elements[1] the "=", and
-				// elements[2] the value.
-				String[] elements = line.split(" ");
-				preferences.put(elements[0], elements[2]);
-			}
-			prefFile.close();
-		} catch (IOException e) {
-			// Handle the exception here - probably throw it to a higher class
-			// to display a popup message or something.
+		Scanner prefFile = new Scanner(PREF_FILENAME);
+		while (prefFile.hasNextLine()) {
+			String line = prefFile.nextLine();
+			// Each line consists of KEY_NAME = VALUE, so splitting on " "
+			// will make elements[0] the key, elements[1] the "=", and
+			// elements[2] the value.
+			String[] elements = line.split(" ");
+			preferences.put(elements[0], elements[2]);
 		}
+		prefFile.close();
 	}
 	
 	/**
