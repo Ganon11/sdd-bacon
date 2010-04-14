@@ -29,6 +29,8 @@ package BACON;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,39 +71,43 @@ import java.util.Scanner;
 	 */
 	public void loadDatabase() {
 		allComics.clear();
-		Scanner dataFile = new Scanner(DATA_FILE);
-		String dateSaved = dataFile.nextLine();
-		// The date is saved in format:
-		// dow mon dd hh:mm:ss zzz yyyy
-		// For more information, see the Date class.
-		String[] dateItems = dateSaved.split(" ");
-        int year = new Integer(dateItems[5]).intValue();
-        int day = new Integer(dateItems[2]).intValue();
-		dateLoaded = DateUtils.createDate(year, dateItems[1], day);
+        try {
+            Scanner dataFile = new Scanner(new FileReader(DATA_FILE));
+            String dateSaved = dataFile.nextLine();
+            // The date is saved in format:
+            // dow mon dd hh:mm:ss zzz yyyy
+            // For more information, see the Date class.
+            String[] dateItems = dateSaved.split(" ");
+            int year = new Integer(dateItems[5]).intValue();
+            int day = new Integer(dateItems[2]).intValue();
+            dateLoaded = DateUtils.createDate(year, dateItems[1], day);
 		
-		while (dataFile.hasNextLine()) {
-			// The Data File consists of the Comic Title, Author, and Image
-			// File Path on seperate lines.  Each set of information is, in
-			// turn, seperated by a blank line.
-			ComicSite comic;
-			ComicStrip strip;
-			String titleLine = dataFile.nextLine();
-			String authorLine = dataFile.nextLine();
-			String fileLine = dataFile.nextLine();
-			// If this was the last entry, there may not be a blank line
-			// following it.
-			if (dataFile.hasNextLine()) {
-				dataFile.nextLine();
-			}
-			
-			String title = titleLine.substring(12);
-			String author = authorLine.substring(14);
-			String filePath = fileLine.substring(12);
-			strip = new ComicStrip(filePath);
-			comic = new ComicSite(title, author);
-			comic.setStrip(strip);
-			allComics.add(comic);
-		}
+            while (dataFile.hasNextLine()) {
+                // The Data File consists of the Comic Title, Author, and Image
+                // File Path on seperate lines.  Each set of information is, in
+                // turn, seperated by a blank line.
+                ComicSite comic;
+                ComicStrip strip;
+                String titleLine = dataFile.nextLine();
+                String authorLine = dataFile.nextLine();
+                String fileLine = dataFile.nextLine();
+                // If this was the last entry, there may not be a blank line
+                // following it.
+                if (dataFile.hasNextLine()) {
+                    dataFile.nextLine();
+                }
+                
+                String title = titleLine.substring(12);
+                String author = authorLine.substring(14);
+                String filePath = fileLine.substring(12);
+                strip = new ComicStrip(filePath);
+                comic = new ComicSite(title, author);
+                comic.setStrip(strip);
+                allComics.add(comic);
+            }
+        } catch (FileNotFoundException e) {
+            // Toss it!
+        }
 	}
 	
 	/**
