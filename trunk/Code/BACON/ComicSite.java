@@ -56,6 +56,7 @@ public class ComicSite {
 		comicName = name;
 		comicUrl = url;
 		comicAuthor = "";
+		comicAuthor = "";
 	}
 	
 	/**
