@@ -32,12 +32,14 @@ import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
  
  public class ComicDatabase {
 	private final String DATA_FILE;
 	private List<ComicSite> allComics;
+    private Date dateLoaded;
 	
 	/**
 	 * Creates the ComicDatabase with the data file stored in the specified
@@ -62,10 +64,21 @@ import java.util.Scanner;
 	 *
 	 * WARNING: Calling this method clears the list of comics in order to load
 	 * the new list!
+	 *
+	 * @see Date
 	 */
 	public void loadDatabase() {
 		allComics.clear();
 		Scanner dataFile = new Scanner(DATA_FILE);
+		String dateSaved = dataFile.nextLine();
+		// The date is saved in format:
+		// dow mon dd hh:mm:ss zzz yyyy
+		// For more information, see the Date class.
+		String[] dateItems = dateSaved.split(" ");
+        int year = new Integer(dateItems[5]).intValue();
+        int day = new Integer(dateItems[2]).intValue();
+		dateLoaded = DateUtils.createDate(year, dateItems[1], day);
+		
 		while (dataFile.hasNextLine()) {
 			// The Data File consists of the Comic Title, Author, and Image
 			// File Path on seperate lines.  Each set of information is, in
@@ -112,12 +125,14 @@ import java.util.Scanner;
 	private void saveDatabase() {
 		try {
 			FileWriter dataFile = new FileWriter(DATA_FILE);
+			Date currentDate = DateUtils.getCurrentDate();
+			dataFile.write(currentDate.toString());
 			for (ComicSite comic : allComics) {
 				ComicStrip strip = comic.getStrip();
 				dataFile.write("Comic Name: " + comic.getTitle() + "\n");
 				dataFile.write("Comic Author: " + comic.getAuthor() + "\n");
 				String pathline = "Image Path: " + strip.getFilepath();
-				dataFile.write(pathline + "\n\n");
+				dataFile.write(pathline + "\n");
 			}
 			dataFile.close();
 		} catch (IOException e) {
