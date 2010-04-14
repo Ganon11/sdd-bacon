@@ -30,7 +30,12 @@ package BACON;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DateUtils {
+public final class DateUtils {
+    /**
+    * NO ONE SHALL CREATE A DateUtils OBJECT
+    */
+    private DateUtils() {
+    }
     /**
      * Creates a Date object representing the current time.
      *
