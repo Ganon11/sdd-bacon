@@ -31,19 +31,48 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DateUtils {
+    /**
+     * Creates a Date object representing the current time.
+     *
+     * @return A Date object representing the current time.
+     */
 	public static Date getCurrentDate() {
 		GregorianCalendar currentDate = new GregorianCalendar();
 		return currentDate.getTime();
 	}
 	
+    /**
+     * Creates a Date object at day/month/year
+     *
+     * @param year The year in YYYY form.
+     * @param month The month in MM or M form (i.e. 11 or 4)
+     * @param day The day in DD or D form (i.e. 21 or 6)
+     * @return A date representing the given parameters.
+     */
 	public static Date createDate(int year, int month, int day) {
 		GregorianCalendar date = new GregorianCalendar(year, month, day);
 		return date.getTime();
 	}
+	
+    /**
+     * Creates a Date object at day/month/year
+     *
+     * @param year The year in YYYY form.
+     * @param month The month in String formate (either 'Jan' or 'April')
+     * @param day The day in DD or D form (i.e. 21 or 6)
+     * @return A date representing the given parameters.
+     */
     
     public static Date createDate(int year, String month, int day) {
         return DateUtils.createDate(year, DateUtils.monthStringToInteger(month), day);
     }
+	
+    /**
+     * Fetches the numerical month value based on the given String representation.
+     *
+     * @param month The month in String format (either 'Jan' or 'April')
+     * @return The month's integer value, or 0 if bad input is given.
+     */
 	
 	public static int monthStringToInteger(String month) {
 		if (month.equalsIgnoreCase("Jan") || month.equalsIgnoreCase("January")) {
