@@ -126,7 +126,10 @@ import java.util.Scanner;
 		try {
 			FileWriter dataFile = new FileWriter(DATA_FILE);
 			Date currentDate = DateUtils.getCurrentDate();
-			dataFile.write(currentDate.toString());
+			// The date is saved in format:
+			// dow mon dd hh:mm:ss zzz yyyy
+			// For more information, see the Date class.
+			dataFile.write(currentDate.toString() + "\n");
 			for (ComicSite comic : allComics) {
 				ComicStrip strip = comic.getStrip();
 				dataFile.write("Comic Name: " + comic.getTitle() + "\n");
