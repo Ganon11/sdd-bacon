@@ -87,7 +87,7 @@ public class BaconSystem {
     }
     
     private static class TagMapper extends HTMLEditorKit.ParserCallback {
-        private HashMap<HTML.Tag, ArrayList<AttributeSet>> tagMap;
+        private HashMap<HTML.Tag, ArrayList<AttributeSet>> tagMap; //The HTML tag map being created
         
          /**
          * 
