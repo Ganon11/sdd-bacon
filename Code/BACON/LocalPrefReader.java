@@ -27,6 +27,7 @@
 
 package BACON;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ import java.util.Scanner;
 import java.util.Set;
 
  public class LocalPrefReader {
-    public static final String PREF_FILENAME = ".localpref.dat";
+    public static String PREF_FILENAME = ".localpref.dat";
     private Map<String, String> preferences;
 
     /**
@@ -52,24 +53,30 @@ import java.util.Set;
      * Map.
      */
     public void loadPreferences() {
-        Scanner prefFile = new Scanner(PREF_FILENAME);
-        while (prefFile.hasNextLine()) {
-            String line = prefFile.nextLine();
-            // Each line consists of KEY_NAME = VALUE, so splitting on " "
-            // will make elements[0] the key, elements[1] the "=", and
-            // elements[2] the value.
-            String[] elements = line.split(" ");
-            preferences.put(elements[0], elements[2]);
+        Scanner prefFile;
+        try {
+            prefFile = new Scanner(new FileReader(PREF_FILENAME));
+            while (prefFile.hasNextLine()) {
+                String line = prefFile.nextLine();
+                // Each line consists of KEY_NAME = VALUE, so splitting on " "
+                // will make elements[0] the key, elements[1] the "=", and
+                // elements[2] the value.
+                String[] elements = line.split(" ");
+                preferences.put(elements[0], elements[2]);
+            }
+            prefFile.close();
+        } catch (java.io.FileNotFoundException e) {
+            // Toss this up for GUI error display?
         }
-        prefFile.close();
     }
 
     /**
      * Saves the current map of preferences to PREF_FILENAME.
      */
     public void savePreferences() {
+        FileWriter prefFile;
         try {
-            FileWriter prefFile = new FileWriter(PREF_FILENAME);
+            prefFile = new FileWriter(PREF_FILENAME);
             Set<String> allKeys = preferences.keySet();
             for (String k : allKeys) {
                 String v = preferences.get(k);
