@@ -42,37 +42,36 @@ import java.util.Scanner;
     private final String DATA_FILE;
     private List<ComicSite> allComics;
     private Date dateLoaded;
-
-    /**
-     * Creates the ComicDatabase with the data file stored in the specified
-     * location.
-     */
-    public ComicDatabase(String dataFileName) {
-        DATA_FILE = dataFileName;
+	
+	/**
+	 * Creates the ComicDatabase with the data file stored in the specified
+	 * location.
+	 */
+	public ComicDatabase(String dataFileName) {
+		DATA_FILE = dataFileName;
+		allComics = new ArrayList<ComicSite>();
+	}
+	
+	/**
+	 * Creates the ComicDatabase with the data file stored in the default
+	 * location.
+	 */
+	public ComicDatabase() {
+		DATA_FILE = ".datafile.dat";
         allComics = new ArrayList<ComicSite>();
-    }
-
-    /**
-     * Creates the ComicDatabase with the data file stored in the default
-     * location.
-     */
-    public ComicDatabase() {
-        DATA_FILE = ".datafile.dat";
-    }
-
-    /**
-     * Loads the file specified by DATA_FILE, and reads in the list of
-     * ComicSites and ComicStrips.
-     *
-     * WARNING: Calling this method clears the list of comics in order to load
-     * the new list!
-     *
-     * @throws FileNotFoundException If the database file does not exist.
-     *
-     * @see Date
-     */
-    public void loadDatabase() throws FileNotFoundException {
-        allComics.clear();
+	}
+	
+	/**
+	 * Loads the file specified by DATA_FILE, and reads in the list of
+	 * ComicSites and ComicStrips.
+	 *
+	 * WARNING: Calling this method clears the list of comics in order to load
+	 * the new list!
+	 *
+	 * @see Date
+	 */
+	public void loadDatabase() throws FileNotFoundException {
+		allComics.clear();
         try {
             Scanner dataFile = new Scanner(new FileReader(DATA_FILE));
             String dateSaved = dataFile.nextLine();
@@ -85,30 +84,28 @@ import java.util.Scanner;
             dateLoaded = DateUtils.createDate(year, dateItems[1], day);
 
             while (dataFile.hasNextLine()) {
-                // The Data File consists of the Comic Title, Author, and Image
-                // File Path on seperate lines.  Each set of information is, in
-                // turn, seperated by a blank line.
+                // The Data File consists of the Comic Title, Author, Image
+                // File Path, and URL on separate lines.
                 ComicSite comic;
                 ComicStrip strip;
                 String titleLine = dataFile.nextLine();
                 String authorLine = dataFile.nextLine();
                 String fileLine = dataFile.nextLine();
-                // If this was the last entry, there may not be a blank line
-                // following it.
-                if (dataFile.hasNextLine()) {
-                    dataFile.nextLine();
-                }
+                String urlLine = dataFile.nextLine();
 
                 String title = titleLine.substring(12);
                 String author = authorLine.substring(14);
-                String filePath = fileLine.substring(12);
+                String filePath = fileLine.substring(12);              
+                String url = urlLine.substring(11);
                 strip = new ComicStrip(filePath);
-                comic = new ComicSite(title, author);
+                comic = new ComicSite(title, author, url);
                 comic.setStrip(strip);
                 allComics.add(comic);
             }
         } catch (FileNotFoundException e) {
+            // Do we really need to throw a whole new exception?  e is already a FileNotFoundException.
             throw new FileNotFoundException(); // Should be caught by GUI
+            //throw e;
         }
     }
 
@@ -160,5 +157,14 @@ import java.util.Scanner;
     public List<ComicSite> getAllComics() {
         return allComics;
     }
+	
+	/**
+	 * Fetches the date when comics were last saved.
+	 *
+	 * @return The Date pbject representing when the comics were last saved.
+	 */
+	public Date getSaveDate() {
+		return dateLoaded;
+	}
  }
 
