@@ -50,26 +50,31 @@ public final class DateUtils {
      * Creates a Date object at day/month/year
      *
      * @param year The year in YYYY form.
-     * @param month The month in MM or M form (i.e. 11 or 4)
+     * @param month The month in MM or M form (i.e. 11 or 4).  Must be 0 based.
      * @param day The day in DD or D form (i.e. 21 or 6)
      * @return A date representing the given parameters.
      */
 	public static Date createDate(int year, int month, int day) {
+        // GregorianCalendar expects month in 0 based form (January is 0).
 		GregorianCalendar date = new GregorianCalendar(year, month, day);
 		return date.getTime();
 	}
 	
     /**
-     * Creates a Date object at day/month/year
+     * Creates a Date object at day/month/year.  If a bad month is given, returns null.
      *
      * @param year The year in YYYY form.
      * @param month The month in String formate (either 'Jan' or 'April')
      * @param day The day in DD or D form (i.e. 21 or 6)
-     * @return A date representing the given parameters.
+     * @return A date representing the given parameters, or null if a bad Month is given.
      */
     
     public static Date createDate(int year, String month, int day) {
-        return DateUtils.createDate(year, DateUtils.monthStringToInteger(month), day);
+        int monthVal = DateUtils.monthStringToInteger(month);
+        if (monthVal == -1) {
+            return null;
+        }
+        return DateUtils.createDate(year, monthVal, day);
     }
 	
     /**
@@ -81,41 +86,41 @@ public final class DateUtils {
 	
 	public static int monthStringToInteger(String month) {
 		if (month.equalsIgnoreCase("Jan") || month.equalsIgnoreCase("January")) {
-			return 1;
+			return 0;
 		}
 		if (month.equalsIgnoreCase("Feb") || month.equalsIgnoreCase("February")) {
-			return 2;
+			return 1;
 		}
 		if (month.equalsIgnoreCase("Mar") || month.equalsIgnoreCase("March")) {
-			return 3;
+			return 2;
 		}
 		if (month.equalsIgnoreCase("Apr") || month.equalsIgnoreCase("April")) {
-			return 4;
+			return 3;
 		}
 		if (month.equalsIgnoreCase("May")) {
-			return 5;
+			return 4;
 		}
 		if (month.equalsIgnoreCase("Jun") || month.equalsIgnoreCase("June")) {
-			return 6;
+			return 5;
 		}
 		if (month.equalsIgnoreCase("Jul") || month.equalsIgnoreCase("July")) {
-			return 7;
+			return 6;
 		}
 		if (month.equalsIgnoreCase("Aug") || month.equalsIgnoreCase("August")) {
-			return 8;
+			return 7;
 		}
 		if (month.equalsIgnoreCase("Sep") || month.equalsIgnoreCase("September")) {
-			return 9;
+			return 8;
 		}
 		if (month.equalsIgnoreCase("Oct") || month.equalsIgnoreCase("October")) {
-			return 10;
+			return 9;
 		}
 		if (month.equalsIgnoreCase("Nov") || month.equalsIgnoreCase("November")) {
-			return 11;
+			return 10;
 		}
 		if (month.equalsIgnoreCase("Dec") || month.equalsIgnoreCase("December")) {
-			return 12;
+			return 11;
 		}
-		return 0;
+		return -1;
 	}
 }
