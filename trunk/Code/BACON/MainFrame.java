@@ -27,11 +27,15 @@
 
 package BACON;
 
+import java.awt.Image;
+import javax.swing.*;
+
 public class MainFrame extends javax.swing.JFrame {
 
     /** Creates new form MainFrame */
-    public MainFrame() {
+    public MainFrame(ComicDatabase db) {
         initComponents();
+        database = db;
     }
 
     /** This method is called from within the constructor to
@@ -222,16 +226,15 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
-        // TODO add your handling code here:
+        displayNextImage(false);
     }//GEN-LAST:event_prevButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
+        displayNextImage(true);
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        // Displays a window with the license text and a link to the Google code
-        // site.
+        // Displays a window with the license text and a link to the Google code site.
         new AboutFrame().setVisible(true);
     }//GEN-LAST:event_aboutButtonActionPerformed
 
@@ -240,11 +243,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void sortByNameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByNameMenuItemActionPerformed
-        // TODO add your handling code here:
+        ComicSite.sortMethod = SortMethod.SORT_BY_ALPHABETICAL;
+        database.sortComicList();
     }//GEN-LAST:event_sortByNameMenuItemActionPerformed
 
     private void sortByUpdateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByUpdateMenuItemActionPerformed
-        // TODO add your handling code here:
+        ComicSite.sortMethod = SortMethod.SORT_BY_DATE;
+        database.sortComicList();
     }//GEN-LAST:event_sortByUpdateMenuItemActionPerformed
 
     private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
@@ -268,15 +273,25 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_saveDatabaseMenuItemActionPerformed
 
     /**
+     * Displays the next or previous image.
+     *
+     * @param next If true, the next image is displayed. If false, the previous is.
+     */
+    public void displayNextImage(boolean next) {
+        Image img = (next) ? database.getNextImage() : database.getPreviousImage();
+        JLabel lab = new JLabel();
+        ImageIcon ic = new ImageIcon(img);
+        mainComicPanel.add(lab);
+        //TODO: Set the label to display the necessary data
+    }
+
+    /**
      * We may wish to remove this main...thoughts?
-    * @param args the command line arguments
-    */
+     *  I think we should ditch it, to be honest.
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
-        });
+        new MainFrame(null).setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,5 +318,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu sortMenu;
     private javax.swing.JMenu webcomicMenu;
     // End of variables declaration//GEN-END:variables
+    private ComicDatabase database;
 
 }

@@ -33,45 +33,48 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 
  public class ComicDatabase {
     private final String DATA_FILE;
-    private List<ComicSite> allComics;
+    private LinkedList<ComicSite> allComics;
     private Date dateLoaded;
-	
-	/**
-	 * Creates the ComicDatabase with the data file stored in the specified
-	 * location.
-	 */
-	public ComicDatabase(String dataFileName) {
-		DATA_FILE = dataFileName;
-		allComics = new ArrayList<ComicSite>();
-	}
-	
-	/**
-	 * Creates the ComicDatabase with the data file stored in the default
-	 * location.
-	 */
-	public ComicDatabase() {
-		DATA_FILE = ".datafile.dat";
-        allComics = new ArrayList<ComicSite>();
-	}
-	
-	/**
-	 * Loads the file specified by DATA_FILE, and reads in the list of
-	 * ComicSites and ComicStrips.
-	 *
-	 * WARNING: Calling this method clears the list of comics in order to load
-	 * the new list!
-	 *
-	 * @see Date
-	 */
-	public void loadDatabase() throws FileNotFoundException {
-		allComics.clear();
+    private ListIterator<ComicSite> it;
+
+    /**
+     * Creates the ComicDatabase with the data file stored in the specified
+     * location.
+     */
+    public ComicDatabase(String dataFileName) {
+        DATA_FILE = dataFileName;
+        allComics = new LinkedList<ComicSite>();
+    }
+
+    /**
+     * Creates the ComicDatabase with the data file stored in the default
+     * location.
+     */
+    public ComicDatabase() {
+        DATA_FILE = ".datafile.dat";
+        allComics = new LinkedList<ComicSite>();
+    }
+
+    /**
+     * Loads the file specified by DATA_FILE, and reads in the list of
+     * ComicSites and ComicStrips.
+     *
+     * WARNING: Calling this method clears the list of comics in order to load
+     * the new list!
+     *
+     * @see Date
+     */
+    public void loadDatabase() throws FileNotFoundException {
+        allComics.clear();
         try {
             Scanner dataFile = new Scanner(new FileReader(DATA_FILE));
             String dateSaved = dataFile.nextLine();
@@ -95,17 +98,16 @@ import java.util.Scanner;
 
                 String title = titleLine.substring(12);
                 String author = authorLine.substring(14);
-                String filePath = fileLine.substring(12);              
+                String filePath = fileLine.substring(12);
                 String url = urlLine.substring(11);
                 strip = new ComicStrip(filePath);
                 comic = new ComicSite(title, author, url);
                 comic.setStrip(strip);
-                allComics.add(comic);
+                allComics.addFirst(comic);
+                it = allComics.listIterator();
             }
         } catch (FileNotFoundException e) {
-            // Do we really need to throw a whole new exception?  e is already a FileNotFoundException.
-            throw new FileNotFoundException(); // Should be caught by GUI
-            //throw e;
+            throw e;
         }
     }
 
@@ -118,7 +120,7 @@ import java.util.Scanner;
      *
      * @param newComics List of currently loaded/displayed ComicSites and ComicStrips.
      */
-    public void saveDatabase(List<ComicSite> newComics) {
+    public void saveDatabase(LinkedList<ComicSite> newComics) {
         allComics = newComics;
         this.saveDatabase();
     }
@@ -152,19 +154,67 @@ import java.util.Scanner;
     /**
      * Fetches the loaded list of all comics.
      *
-     * @return A list of ComicSites, each of which has the proper image loaded.
+     * @return A LinkedList of ComicSites, each of which has the proper image loaded.
      */
-    public List<ComicSite> getAllComics() {
+    public LinkedList<ComicSite> getAllComics() {
         return allComics;
     }
-	
-	/**
-	 * Fetches the date when comics were last saved.
-	 *
-	 * @return The Date pbject representing when the comics were last saved.
-	 */
-	public Date getSaveDate() {
-		return dateLoaded;
-	}
- }
 
+    /**
+     * Fetches the date when comics were last saved.
+     *
+     * @return The Date pbject representing when the comics were last saved.
+     */
+    public Date getSaveDate() {
+        return dateLoaded;
+    }
+
+    /**
+     * Re-sorts the list, presumably after ComicSite's sortMethod has changed.
+     */
+    public void sortComicList() {
+        ComicSite cs;
+        if (it.hasNext()) { // We need to know what the current comic is
+            it.next(); // so that we can still iterate from its position
+            cs = it.previous();
+        } else if (it.hasPrevious()) {
+            it.previous();
+            cs = it.next();
+        } else { // List is empty, so don't bother re-sorting
+            return;
+        }
+        Collections.sort(allComics); // Yes, this is an "unchecked or unsafe operation"
+        int pos = Collections.binarySearch(allComics, cs);
+        it = (pos < 0) ? allComics.listIterator() : allComics.listIterator(pos);
+    }
+
+    /**
+     * Returns the next image for display. Circles to the first if the current image
+     * is the last in the list.
+     *
+     * @return An Image of the next strip in the list, circling to the first if necessary.
+     */
+    public Image getNextImage() {
+        if (it.hasNext()) {
+            return it.next().getStrip().getComicStripImage();
+        } else {
+            it = allComics.listIterator();
+            return it.next().getStrip().getComicStripImage();
+        }
+    }
+
+    /**
+     * Returns the previous image for display. Circles to the last if the current image
+     * is the first in the list.
+     *
+     * @return An Image of the next strip in the list, circling to the first if necessary.
+     */
+    public Image getPreviousImage() {
+        if (it.hasPrevious()) {
+            return it.previous().getStrip().getComicStripImage();
+        } else {
+            it = allComics.listIterator(allComics.size());
+            return it.previous().getStrip().getComicStripImage();
+        }
+    }
+}
