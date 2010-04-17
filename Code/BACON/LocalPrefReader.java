@@ -68,6 +68,12 @@ import java.util.Set;
         } catch (java.io.FileNotFoundException e) {
             // Toss this up for GUI error display?
         }
+        if (preferences.get("SortStyle").equals("A_TO_Z_ALPHABETICAL")) {
+            ComicSite.sortMethod = SortMethod.SORT_BY_ALPHABETICAL;
+        }
+        else if (preferences.get("SortStyle").equals("DATE_LAST_UPDATED")) {
+            ComicSite.sortMethod = SortMethod.SORT_BY_DATE;
+        }
     }
 
     /**
