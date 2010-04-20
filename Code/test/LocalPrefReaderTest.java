@@ -38,9 +38,10 @@ public class LocalPrefReaderTest {
      */
     @Test
     public void test_getPreferenceWithPreferenceNotPresent() {
+        LocalPrefReader.PREF_FILENAME = "test" + java.io.File.separator + "fakelocalpref.txt";
         LocalPrefReader lpr = new LocalPrefReader();
         String pref = lpr.getPreference("not present");
-        assertSame(pref, null);
+        assertNull(pref);
     }
 
     /**
