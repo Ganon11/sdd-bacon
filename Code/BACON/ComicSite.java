@@ -32,6 +32,7 @@ public class ComicSite implements Comparable<ComicSite> {
     private String comicName;   // The name of the Web Comic.
     private String comicAuthor; // The author of the Web Comic.
     private String comicUrl; //The URL of the comic site.
+    private int comicIndex; //The index of the actual comic image on the site
     public static SortMethod sortMethod; // How the comics should be sorted
 
     /**
@@ -41,10 +42,11 @@ public class ComicSite implements Comparable<ComicSite> {
      * @param author    The Webcomic Author's name.
      * @param url   The Webcomic's site URL, such as "http://www.cad-comic.com"
      */
-    public ComicSite(String name, String author, String url) {
+    public ComicSite(String name, String author, String url, int index) {
         comicName = name;
         comicAuthor = author;
         comicUrl = url;
+        comicIndex = index;
     }
 
     /**
@@ -53,7 +55,7 @@ public class ComicSite implements Comparable<ComicSite> {
      * @param name  The Webcomic Name, such as "Ctrl-Alt-Del"
      * @param url   The Webcomic's site URL, such as "http://www.cad-comic.com"
      */
-    public ComicSite(String name, String url) {
+    public ComicSite(String name, String url, int index) {
         comicName = name;
         comicUrl = url;
         comicAuthor = "";
