@@ -7,4 +7,4 @@ test:
 #
 # Mike's note: For windows:
 # Compile tests: javac -cp .;test/junit-4.8.1.jar test/*.java
-# Run tests: java -cp .:test/junit-4.8.1.jar org.junit.runner.JUnitCore test.<ClassNameTest>
+# Run tests: java -cp .;test/junit-4.8.1.jar org.junit.runner.JUnitCore test.<ClassNameTest>

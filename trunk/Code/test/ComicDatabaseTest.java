@@ -55,11 +55,11 @@ public class ComicDatabaseTest {
         db.loadDatabase();
         List<BACON.ComicSite> resultList = db.getAllComics();
         BACON.ComicSite testComic = resultList.get(0);
-        String testPath = "~/sdd-bacon/PanelExamples/4x2panels.gif";
-        assertEquals("DOMINIC DEEGAN", testComic.getTitle());
-        assertEquals("M IS FOR MOOKIE", testComic.getAuthor());
+        String testPath = "~/sdd-bacon/PanelExamples/infinitecanvaspanels.png";
+        assertEquals("Girly", testComic.getTitle());
+        assertEquals("Mr. Pizzuto-san", testComic.getAuthor());
         assertEquals(testPath, testComic.getStrip().getFilepath());
-        assertEquals("http://www.dominic-deegan.com/", testComic.getUrl());
+        assertEquals("http://www.prettygirly.com/", testComic.getUrl());
     }
     
     /**
