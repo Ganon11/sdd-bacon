@@ -58,7 +58,7 @@ public class BaconSystem {
      * Reads a webpage and returns a list of all the image links found.
      *
      * @param  url  the URL of the webpage to read
-     * @return      a list of all image URLs gathered from the page
+     * @return      an array of all image URLs gathered from the page
      */
     public static URL[] getImageURLs(String url) {
         TagMapper tm = TagMapper.parse(url);
@@ -73,23 +73,44 @@ public class BaconSystem {
             base = new URL(url);
         } catch(java.net.MalformedURLException e) { //java.net.URISyntaxException e) {
             //I'm pretty sure this is impossible at this point,
-            //since the mapper made a URL successfully...
+            //since the mapper made the URL successfully...
             return null;
         }
         
-		int i = 0;
 		URL[] urls = new URL[imgs.size()];
-        for(AttributeSet s: imgs) {
+		for(int i = 0; i < urls.length; ++i) {
             try {
-				urls[i] = new URL(base, s.getAttribute(HTML.Attribute.SRC).toString());
+				urls[i] = new URL(base, imgs.get(i).getAttribute(HTML.Attribute.SRC).toString());
             } catch(java.net.MalformedURLException e) {
                 //Bad image URL, keep a null placeholder
             }
-            ++i;
         }
 
         return urls;
     }
+	
+	/**
+     * Reads a webpage and returns the nth image link on the page.
+     *
+     * @param  url  the URL of the webpage to read
+	 * @param  n	the index of the image to retrieve
+     * @return      the URL of the nth image on the page, or null if it cannot be retrieved
+     */
+	public static URL getImageN(String url, int n) {
+		if(n < 0) return null; //BAD USER!
+		TagMapper tm = TagMapper.parse(url);
+        if(tm == null) return null;
+        
+        ArrayList<AttributeSet> imgs = tm.getTagMap().get(HTML.Tag.IMG);
+        if(imgs == null || n >= imgs.size()) return null;
+        
+		try {
+			return new URL(new URL(url), imgs.get(n).getAttribute(HTML.Attribute.SRC).toString());
+		} catch(java.net.MalformedURLException e) { //java.net.URISyntaxException e) {
+            //The URL on the page failed to resolve with the base URL...
+        }
+		return null;
+	}
 
     /**
      * A wrapper class around the HTMLEditorKit used to make the getParser method public.
