@@ -88,20 +88,22 @@ import java.util.Scanner;
 
             while (dataFile.hasNextLine()) {
                 // The Data File consists of the Comic Title, Author, Image
-                // File Path, and URL on separate lines.
+                // File Path, URL, and Comic Index on separate lines.
                 ComicSite comic;
                 ComicStrip strip;
                 String titleLine = dataFile.nextLine();
                 String authorLine = dataFile.nextLine();
                 String fileLine = dataFile.nextLine();
                 String urlLine = dataFile.nextLine();
+                String indexLine = dataFile.nextLine();
 
                 String title = titleLine.substring(12);
                 String author = authorLine.substring(14);
                 String filePath = fileLine.substring(12);
                 String url = urlLine.substring(11);
+                int index = Integer.parseInt(indexLine.substring(13));
                 strip = new ComicStrip(filePath);
-                comic = new ComicSite(title, author, url);
+                comic = new ComicSite(title, author, url, index);
                 comic.setStrip(strip);
                 allComics.addFirst(comic);
                 it = allComics.listIterator();
@@ -143,6 +145,7 @@ import java.util.Scanner;
                 dataFile.write("Comic Author: " + comic.getAuthor() + "\n");
                 String pathline = "Image Path: " + strip.getFilepath();
                 dataFile.write(pathline + "\n");
+                dataFile.write("Comic Index: " + comic.getIndex() + "\n");
             }
             dataFile.close();
         } catch (IOException e) {
