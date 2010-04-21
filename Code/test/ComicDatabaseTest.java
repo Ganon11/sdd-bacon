@@ -60,6 +60,7 @@ public class ComicDatabaseTest {
         assertEquals("Mr. Pizzuto-san", testComic.getAuthor());
         assertEquals(testPath, testComic.getStrip().getFilepath());
         assertEquals("http://www.prettygirly.com/", testComic.getUrl());
+        assertEquals(2, testComic.getIndex());
     }
     
     /**
