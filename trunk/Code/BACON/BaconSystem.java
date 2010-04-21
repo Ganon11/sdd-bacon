@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 //import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URI;
 import java.net.URL;
 import java.util.*;
 
@@ -57,18 +58,34 @@ public class BaconSystem {
      * Reads a webpage and returns a list of all the image links found.
      *
      * @param  url  the URL of the webpage to read
-     * @return      a HashMap of HTML tag types to lists of their use
+     * @return      a list of all image URLs gathered from the page
      */
-    public static ArrayList<String> getImageURLs(String url) {
-        HashMap<HTML.Tag, ArrayList<AttributeSet>> tagMap = getTagMap(url);
-        if(tagMap == null) return null;
-
-        ArrayList<AttributeSet> imgs = tagMap.get(HTML.Tag.IMG);
-        if(imgs == null) return new ArrayList<String>();
-
-        ArrayList<String> urls = new ArrayList<String>(imgs.size());
+    public static URL[] getImageURLs(String url) {
+        TagMapper tm = TagMapper.parse(url);
+        if(tm == null) return null;
+        
+        ArrayList<AttributeSet> imgs = tm.getTagMap().get(HTML.Tag.IMG);
+        if(imgs == null) return new URL[0];
+        
+        
+        URL base;
+        try {
+            base = new URL(url);
+        } catch(java.net.MalformedURLException e) { //java.net.URISyntaxException e) {
+            //I'm pretty sure this is impossible at this point,
+            //since the mapper made a URL successfully...
+            return null;
+        }
+        
+		int i = 0;
+		URL[] urls = new URL[imgs.size()];
         for(AttributeSet s: imgs) {
-            urls.add(s.getAttribute(HTML.Attribute.SRC).toString());
+            try {
+				urls[i] = new URL(base, s.getAttribute(HTML.Attribute.SRC).toString());
+            } catch(java.net.MalformedURLException e) {
+                //Bad image URL, keep a null placeholder
+            }
+            ++i;
         }
 
         return urls;
