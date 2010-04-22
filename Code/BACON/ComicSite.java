@@ -41,7 +41,7 @@ public class ComicSite implements Comparable<ComicSite> {
      * @param name  The Webcomic Name, such as "Ctrl-Alt-Del"
      * @param author    The Webcomic Author's name.
      * @param url   The Webcomic's site URL, such as "http://www.cad-comic.com"
-	 * @param index	The index of the image on the webpage, such as 0 if it's the first image
+     * @param index The index of the image on the webpage, such as 0 if it's the first image
      */
     public ComicSite(String name, String author, String url, int index) {
         comicName = name;
@@ -55,13 +55,13 @@ public class ComicSite implements Comparable<ComicSite> {
      *
      * @param name  The Webcomic Name, such as "Ctrl-Alt-Del"
      * @param url   The Webcomic's site URL, such as "http://www.cad-comic.com"
-	 * @param index	The index of the image on the webpage, such as 0 if it's the first image
+     * @param index The index of the image on the webpage, such as 0 if it's the first image
      */
     public ComicSite(String name, String url, int index) {
         comicName = name;
         comicUrl = url;
         comicAuthor = "";
-		comicIndex = index;
+        comicIndex = index;
     }
 
     /**
@@ -90,8 +90,8 @@ public class ComicSite implements Comparable<ComicSite> {
     public String getAuthor() {
         return comicAuthor;
     }
-	
-	/**
+
+    /**
      * Accessor method for the comic's image index.
      *
      * @return The comic's image index.
@@ -120,6 +120,7 @@ public class ComicSite implements Comparable<ComicSite> {
 
     /**
      * Comparator. Uses whatever type is held in sortType to sort.
+     * Currently returns 0 if SortMethod.SORT_BY_DATE is in effect.
      */
     public int compareTo(ComicSite cs) {
         if (sortMethod == SortMethod.SORT_BY_ALPHABETICAL) {
@@ -138,6 +139,6 @@ public class ComicSite implements Comparable<ComicSite> {
         return this.comicAuthor.equals(cs.getAuthor())
             && this.comicUrl.equals(cs.getUrl())
             && this.comicName.equals(cs.getTitle())
-			&& this.comicIndex == cs.comicIndex;
+            && this.comicIndex == cs.comicIndex;
     }
 }
