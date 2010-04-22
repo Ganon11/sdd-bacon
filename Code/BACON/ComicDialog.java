@@ -233,6 +233,7 @@ public class ComicDialog extends javax.swing.JDialog {
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         if(hasImages()) {
             comicSite = new ComicSite(getComicName(), getComicAuthor(), getComicURL(), cIndex);
+            comicSite.setStrip(new ComicStrip(imageURLs[cIndex].toString()));
             this.dispose();
         } else {
             //Tell user that they must enter and load a valid URL
