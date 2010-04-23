@@ -239,7 +239,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        // TODO add your handling code here:
+        database.saveDatabase();
+        System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void sortByNameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByNameMenuItemActionPerformed
@@ -255,7 +256,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
         ComicSite cs = ComicDialog.show(null);
         if(cs != null) {
-            System.out.println("SANDWICH");
+            //Show a warning dialog with title 'AddComicDialog', and message 'Comic not added successfully.':
+            Object[] options = {"OK"};
+            JOptionPane.showOptionDialog(null, "Comic not added successfully", "AddComicDialog",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);;
         }
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
 
