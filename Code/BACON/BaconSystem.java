@@ -1,7 +1,8 @@
 /**
  * BACON (sdd.bacon@gmail.com)
  *
- * BaconSystem - The backend structure of the BACON Project.
+ * BaconSystem - The backend structure of the BACON Project. Also the main class for
+ * the project.
  *
  * Copyright (c) 2010
  * @author David Pizzuto, Seamus Reynolds, Matt Schoen, Michael Stark
@@ -27,6 +28,10 @@
 
 package BACON;
 
+import BACON.MainFrame;
+import BACON.SwingInput;
+
+import java.io.File;
 import java.io.IOException;
 //import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -42,6 +47,61 @@ import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
 
 public class BaconSystem {
+
+    /**
+     * main - Entry point for the application
+     * @param args The command line arguments
+     */
+    public static void main(String[] args) {
+        boolean notFirstRun = new File(".localpref.dat").exists();
+        ComicDatabase db;
+        if (notFirstRun) {
+            // prompt for location to save comic database and images
+            boolean location = false;
+            String locDb = "", locImages = "";
+            while (!location) {
+                locDb = SwingInput.chooseDirectory("Please input the directory" +
+                                                          " you would like to save the comic" +
+                                                          " database in.");
+                if (locDb.length() != 0) {
+                    location = true;
+                }
+            }
+            location = false;
+            while (!location) {
+                locImages = SwingInput.chooseDirectory("Please input the directory" +
+                                                              " you would like to save the comic" +
+                                                              " images in.");
+                if (locImages.length() != 0) {
+                    location = true;
+                }
+            }
+            LocalPrefReader lpr = new LocalPrefReader();
+            lpr.setPreference("DataBaseFolder", locDb);
+            lpr.setPreference("SortStyle", "A_TO_Z_ALPHABETICAL");
+            db = new ComicDatabase(locDb + File.separator + ".datafile.dat");
+        } else {
+            LocalPrefReader lpr = new LocalPrefReader();
+            String fileLoc = lpr.getPreference("DataBaseFolder");
+            if (fileLoc == null) {
+                // We has a problem. Better get that file again.
+                String locDb = "";
+                boolean location = false;
+                while (!location) {
+                    locDb = SwingInput.chooseDirectory("Please input the directory" +
+                                                              " you would like to save the comic" +
+                                                              " database in.");
+                    if (locDb.length() != 0) {
+                        location = true;
+                    }
+                }
+                fileLoc = locDb;
+                lpr.setPreference("DataBaseFolder", locDb);
+            }
+            db = new ComicDatabase(fileLoc + File.separator + ".datafile.dat");
+        }
+        new MainFrame(db).setVisible(true);
+    }
 
     /**
      * Reads a webpage and returns a map of all the HTML elements.
@@ -63,11 +123,11 @@ public class BaconSystem {
     public static URL[] getImageURLs(String url) {
         TagMapper tm = TagMapper.parse(url);
         if(tm == null) return null;
-        
+
         ArrayList<AttributeSet> imgs = tm.getTagMap().get(HTML.Tag.IMG);
         if(imgs == null) return new URL[0];
-        
-        
+
+
         URL base;
         try {
             base = new URL(url);
@@ -76,11 +136,11 @@ public class BaconSystem {
             //since the mapper made the URL successfully...
             return null;
         }
-        
-		URL[] urls = new URL[imgs.size()];
-		for(int i = 0; i < urls.length; ++i) {
+
+        URL[] urls = new URL[imgs.size()];
+        for(int i = 0; i < urls.length; ++i) {
             try {
-				urls[i] = new URL(base, imgs.get(i).getAttribute(HTML.Attribute.SRC).toString());
+                urls[i] = new URL(base, imgs.get(i).getAttribute(HTML.Attribute.SRC).toString());
             } catch(java.net.MalformedURLException e) {
                 //Bad image URL, keep a null placeholder
             }
@@ -88,29 +148,29 @@ public class BaconSystem {
 
         return urls;
     }
-	
-	/**
+
+    /**
      * Reads a webpage and returns the nth image link on the page.
      *
      * @param  url  the URL of the webpage to read
-	 * @param  n	the index of the image to retrieve
+     * @param  n    the index of the image to retrieve
      * @return      the URL of the nth image on the page, or null if it cannot be retrieved
      */
-	public static URL getImageN(String url, int n) {
-		if(n < 0) return null; //BAD USER!
-		TagMapper tm = TagMapper.parse(url);
+    public static URL getImageN(String url, int n) {
+        if(n < 0) return null; //BAD USER!
+        TagMapper tm = TagMapper.parse(url);
         if(tm == null) return null;
-        
+
         ArrayList<AttributeSet> imgs = tm.getTagMap().get(HTML.Tag.IMG);
         if(imgs == null || n >= imgs.size()) return null;
-        
-		try {
-			return new URL(new URL(url), imgs.get(n).getAttribute(HTML.Attribute.SRC).toString());
-		} catch(java.net.MalformedURLException e) { //java.net.URISyntaxException e) {
+
+        try {
+            return new URL(new URL(url), imgs.get(n).getAttribute(HTML.Attribute.SRC).toString());
+        } catch(java.net.MalformedURLException e) { //java.net.URISyntaxException e) {
             //The URL on the page failed to resolve with the base URL...
         }
-		return null;
-	}
+        return null;
+    }
 
     /**
      * A wrapper class around the HTMLEditorKit used to make the getParser method public.

@@ -33,7 +33,7 @@ public class ComicSite implements Comparable<ComicSite> {
     private String comicAuthor; // The author of the Web Comic.
     private String comicUrl; //The URL of the comic site.
     private int comicIndex; //The index of the actual Web Comic image on the site
-    public static SortMethod sortMethod; // How the comics should be sorted
+    public static SortMethod sortMethod = SortMethod.SORT_BY_ALPHABETICAL; // How the comics should be sorted
 
     /**
      * Constructs a ComicSite object with the correct name, author, and URL.
@@ -117,7 +117,7 @@ public class ComicSite implements Comparable<ComicSite> {
     public String getTitle() {
         return comicName;
     }
-    
+
     /**
      * Fetches the Information String to display.
      *

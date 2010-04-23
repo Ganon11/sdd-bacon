@@ -17,8 +17,7 @@
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/BACON.jar" basedir="build/classes">
             <manifest>
-                <attribute name="Main-Class" value="MainFrame"/>
-                <!-- THIS CLASS NEEDS TO BE CHANGED TO OUR ACTUAL MAIN CLASS-->
+                <attribute name="Main-Class" value="BACON.BaconSystem"/>
             </manifest>
         </jar>
     </target>

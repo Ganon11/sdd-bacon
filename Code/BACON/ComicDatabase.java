@@ -131,7 +131,7 @@ import java.util.Scanner;
      * Saves the current list of ComicSites to the data file specified by
      * DATA_FILE.
      */
-    private void saveDatabase() {
+    public void saveDatabase() {
         try {
             FileWriter dataFile = new FileWriter(DATA_FILE);
             Date currentDate = DateUtils.getCurrentDate();
