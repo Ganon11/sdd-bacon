@@ -55,7 +55,7 @@ public class BaconSystem {
     public static void main(String[] args) {
         boolean notFirstRun = new File(".localpref.dat").exists();
         ComicDatabase db;
-        if (notFirstRun) {
+        if (!notFirstRun) {
             // prompt for location to save comic database and images
             boolean location = false;
             String locDb = "", locImages = "";
