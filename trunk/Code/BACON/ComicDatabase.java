@@ -192,32 +192,32 @@ import java.util.Scanner;
     }
 
     /**
-     * Returns the next image for display. Circles to the first if the current image
+     * Returns the next Comic Site for display. Circles to the first if the current site
      * is the last in the list.
      *
-     * @return An Image of the next strip in the list, circling to the first if necessary.
+     * @return The next Comic Site in the list, circling to the first if necessary.
      */
-    public Image getNextImage() {
+    public ComicSite getNextComic() {
         if (it.hasNext()) {
-            return it.next().getStrip().getComicStripImage();
+            return it.next();
         } else {
             it = allComics.listIterator();
-            return it.next().getStrip().getComicStripImage();
+            return it.next();
         }
     }
 
     /**
-     * Returns the previous image for display. Circles to the last if the current image
+     * Returns the previous Comic Site for display. Circles to the last if the current site
      * is the first in the list.
      *
-     * @return An Image of the next strip in the list, circling to the first if necessary.
+     * @return The next Comic Site in the list, circling to the first if necessary.
      */
-    public Image getPreviousImage() {
+    public ComicSite getPreviousComic() {
         if (it.hasPrevious()) {
-            return it.previous().getStrip().getComicStripImage();
+            return it.previous();
         } else {
             it = allComics.listIterator(allComics.size());
-            return it.previous().getStrip().getComicStripImage();
+            return it.previous();
         }
     }
 }
