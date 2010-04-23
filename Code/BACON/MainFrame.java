@@ -278,21 +278,22 @@ public class MainFrame extends javax.swing.JFrame {
      * @param next If true, the next image is displayed. If false, the previous is.
      */
     public void displayNextImage(boolean next) {
-        Image img = (next) ? database.getNextImage() : database.getPreviousImage();
-        JLabel lab = new JLabel();
+        ComicSite site = (next) ? database.getNextImage() : database.getPreviousImage();
+        Image img = site.getStrip().getComicStripImage();
+        JLabel lab = new JLabel(site.getInfoString());
         ImageIcon ic = new ImageIcon(img);
+        lab.setIcon(ic);
         mainComicPanel.add(lab);
-        //TODO: Set the label to display the necessary data
     }
 
-    /**
-     * We may wish to remove this main...thoughts?
-     *  I think we should ditch it, to be honest.
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        new MainFrame(null).setVisible(true);
-    }
+//    /**
+//     * We may wish to remove this main...thoughts?
+//     *  I think we should ditch it, to be honest.
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        new MainFrame(null).setVisible(true);
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutButton;

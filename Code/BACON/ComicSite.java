@@ -117,6 +117,20 @@ public class ComicSite implements Comparable<ComicSite> {
     public String getTitle() {
         return comicName;
     }
+    
+    /**
+     * Fetches the Information String to display.
+     *
+     * @return The Information String with the Author, Title, URL, etc.
+     */
+    public String getInfoString() {
+        String retval = "\"" + comicName + ",\"";
+        if (!comicAuthor.equals("")) {
+            retval += "by " + comicAuthor + ", ";
+        }
+        retval += "at " + comicUrl;
+        return retval;
+    }
 
     /**
      * Comparator. Uses whatever type is held in sortType to sort.
