@@ -36,6 +36,7 @@
             <classpath location="test/junit-4.8.1.jar"/>
             <classpath location="build/test"/>
             <classpath location="${java.class.path}"/>
+            <test name="test.LocalPrefReaderTest"/>
         </junit>
     </target>
 </project>
