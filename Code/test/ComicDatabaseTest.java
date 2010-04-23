@@ -28,6 +28,8 @@
 package test;
 
 import BACON.ComicDatabase;
+import BACON.ComicSite;
+
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -62,7 +64,7 @@ public class ComicDatabaseTest {
         assertEquals("http://www.prettygirly.com/", testComic.getUrl());
         assertEquals(2, testComic.getIndex());
     }
-    
+
     /**
      * Tests whether loadDatabase reads the date from the DBFile properly.
      */
@@ -73,5 +75,18 @@ public class ComicDatabaseTest {
         db.loadDatabase();
         java.util.Date testDate = BACON.DateUtils.createDate(2010, "APR", 14);
         assertEquals(db.getSaveDate(), testDate);
+    }
+
+    /**
+     * Tests adding a comic to the list.
+     */
+    @Test
+    public void test_AddComic() {
+        String dbFileName = "test" + java.io.File.separator + "fakedatabase.dat";
+        ComicDatabase db = new ComicDatabase(dbFileName);
+        ComicSite cs = new ComicSite("xkcd", "Randall Munroe", "http://www.xkcd.com", 1);
+        db.addComic(cs);
+        ComicSite sc = db.getAllComics().get(0);
+        assertEquals(cs, sc);
     }
 }

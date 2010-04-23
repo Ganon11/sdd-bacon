@@ -36,6 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame(ComicDatabase db) {
         initComponents();
         database = db;
+        setTitle("BACON");
     }
 
     /** This method is called from within the constructor to
@@ -247,12 +248,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
         ComicSite cs = ComicDialog.show(null);
-        if(cs != null) {
+        if(cs == null) {
             //Show a warning dialog with title 'AddComicDialog', and message 'Comic not added successfully.':
             Object[] options = {"OK"};
             JOptionPane.showOptionDialog(null, "Comic not added successfully", "AddComicDialog",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);;
+            return;
         }
+        database.addComic(cs);
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
 
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
@@ -282,6 +285,8 @@ public class MainFrame extends javax.swing.JFrame {
      * @param next If true, the next image is displayed. If false, the previous is.
      */
     public void displayNextImage(boolean next) {
+        for (ComicSite cs : database.getAllComics())
+            System.out.println(cs.getTitle());
         ComicSite site = (next) ? database.getNextComic() : database.getPreviousComic();
         Image img = site.getStrip().getComicStripImage();
         JLabel lab = new JLabel(site.getInfoString());

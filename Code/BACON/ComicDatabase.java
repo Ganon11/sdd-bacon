@@ -177,14 +177,17 @@ import java.util.Scanner;
      */
     public void sortComicList() {
         ComicSite cs;
+        if (allComics.size() <= 1) { // Lists of size 0 or 1 shouldn't be sorted
+            return;
+        }
         if (it.hasNext()) { // We need to know what the current comic is
             it.next(); // so that we can still iterate from its position
             cs = it.previous();
         } else if (it.hasPrevious()) {
             it.previous();
             cs = it.next();
-        } else { // List is empty, so don't bother re-sorting
-            return;
+        } else {
+            return; // Shutting up the compiler...
         }
         Collections.sort(allComics); // Yes, this is an "unchecked or unsafe operation"
         int pos = Collections.binarySearch(allComics, cs);
@@ -219,5 +222,14 @@ import java.util.Scanner;
             it = allComics.listIterator(allComics.size());
             return it.previous();
         }
+    }
+
+    /**
+     * Adds a ComicSite to the list.
+     * @param cs The ComicSite to be added
+     */
+    public void addComic(ComicSite cs) {
+        allComics.addFirst(cs);
+        sortComicList();
     }
 }
