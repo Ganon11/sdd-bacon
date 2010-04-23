@@ -253,7 +253,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sortByUpdateMenuItemActionPerformed
 
     private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
-        // TODO add your handling code here:
+        ComicSite cs = ComicDialog.show(null);
+        if(cs != null) {
+            System.out.println("SANDWICH");
+        }
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
 
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
