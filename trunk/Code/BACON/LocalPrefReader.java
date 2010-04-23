@@ -65,14 +65,16 @@ import java.util.Set;
                 preferences.put(elements[0], elements[2]);
             }
             prefFile.close();
+            if (preferences.get("SortStyle").equals("A_TO_Z_ALPHABETICAL")) {
+                ComicSite.sortMethod = SortMethod.SORT_BY_ALPHABETICAL;
+            }
+            else if (preferences.get("SortStyle").equals("DATE_LAST_UPDATED")) {
+                ComicSite.sortMethod = SortMethod.SORT_BY_DATE;
+            }
         } catch (java.io.FileNotFoundException e) {
             // Toss this up for GUI error display?
-        }
-        if (preferences.get("SortStyle").equals("A_TO_Z_ALPHABETICAL")) {
+        } catch (NullPointerException e) {
             ComicSite.sortMethod = SortMethod.SORT_BY_ALPHABETICAL;
-        }
-        else if (preferences.get("SortStyle").equals("DATE_LAST_UPDATED")) {
-            ComicSite.sortMethod = SortMethod.SORT_BY_DATE;
         }
     }
 
