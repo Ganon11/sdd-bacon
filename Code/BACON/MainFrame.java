@@ -278,7 +278,7 @@ public class MainFrame extends javax.swing.JFrame {
      * @param next If true, the next image is displayed. If false, the previous is.
      */
     public void displayNextImage(boolean next) {
-        ComicSite site = (next) ? database.getNextImage() : database.getPreviousImage();
+        ComicSite site = (next) ? database.getNextComic() : database.getPreviousComic();
         Image img = site.getStrip().getComicStripImage();
         JLabel lab = new JLabel(site.getInfoString());
         ImageIcon ic = new ImageIcon(img);
