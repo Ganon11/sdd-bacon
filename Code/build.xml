@@ -1,0 +1,41 @@
+<project>
+    <path id="classpath.test">
+        <pathelement location="."/>
+        <pathelement location="test/junit-4.8.1.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="./BACON" destdir="build/classes"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/BACON.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="MainFrame"/>
+                <!-- THIS CLASS NEEDS TO BE CHANGED TO OUR ACTUAL MAIN CLASS-->
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="compile-test">
+        <mkdir dir="build/test"/>
+        <javac srcdir="./test" destdir="build/test">
+            <classpath refid="classpath.test"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="compile-test">
+        <junit printsummary="yes">
+            <formatter type="brief" usefile="false"/>
+            <classpath location="test/junit-4.8.1.jar"/>
+            <classpath location="build/test"/>
+            <classpath location="${java.class.path}"/>
+        </junit>
+    </target>
+</project>
