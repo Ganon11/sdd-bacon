@@ -52,7 +52,6 @@ public class MainFrame extends javax.swing.JFrame {
         mainComicPanel = new javax.swing.JPanel();
         prevButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
-        aboutButton = new javax.swing.JButton();
         comicPane = new javax.swing.JScrollPane();
         comicDataLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -69,6 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
         databaseMenu = new javax.swing.JMenu();
         loadDatabaseMenuItem = new javax.swing.JMenuItem();
         saveDatabaseMenuItem = new javax.swing.JMenuItem();
+        aboutButton = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,13 +86,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        aboutButton.setText("About");
-        aboutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutButtonActionPerformed(evt);
-            }
-        });
-
         comicPane.setViewportView(comicDataLabel);
 
         javax.swing.GroupLayout mainComicPanelLayout = new javax.swing.GroupLayout(mainComicPanel);
@@ -100,29 +93,25 @@ public class MainFrame extends javax.swing.JFrame {
         mainComicPanelLayout.setHorizontalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainComicPanelLayout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(prevButton)
-                .addGap(73, 73, 73)
-                .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(aboutButton)
+                .addContainerGap()
+                .addGroup(mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                    .addGroup(mainComicPanelLayout.createSequentialGroup()
+                        .addComponent(prevButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(mainComicPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addGap(74, 74, 74))
         );
         mainComicPanelLayout.setVerticalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainComicPanelLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(comicPane, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+            .addGroup(mainComicPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(comicPane, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nextButton)
                     .addComponent(prevButton)
-                    .addComponent(aboutButton))
-                .addContainerGap())
+                    .addComponent(nextButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         fileMenu.setText("File");
@@ -209,6 +198,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(databaseMenu);
 
+        aboutButton.setText("About");
+        aboutButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aboutButtonMouseClicked(evt);
+            }
+        });
+        menuBar.add(aboutButton);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainComicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainComicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -232,11 +229,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         displayNextImage(true);
     }//GEN-LAST:event_nextButtonActionPerformed
-
-    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        // Displays a window with the license text and a link to the Google code site.
-        new AboutFrame().setVisible(true);
-    }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         database.saveDatabase();
@@ -279,6 +271,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveDatabaseMenuItemActionPerformed
 
+    private void aboutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutButtonMouseClicked
+        // Displays a window with the license text and a link to the Google code site.
+        new AboutFrame().setVisible(true);
+    }//GEN-LAST:event_aboutButtonMouseClicked
+
     /**
      * Displays the next or previous image.
      *
@@ -303,7 +300,7 @@ public class MainFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aboutButton;
+    private javax.swing.JMenu aboutButton;
     private javax.swing.JMenuItem addWebcomicMenuItem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel comicDataLabel;
