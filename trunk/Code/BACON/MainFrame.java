@@ -67,9 +67,6 @@ public class MainFrame extends javax.swing.JFrame {
         addWebcomicMenuItem = new javax.swing.JMenuItem();
         editComicMenuItem = new javax.swing.JMenuItem();
         removeComicMenuItem = new javax.swing.JMenuItem();
-        databaseMenu = new javax.swing.JMenu();
-        loadDatabaseMenuItem = new javax.swing.JMenuItem();
-        saveDatabaseMenuItem = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -180,26 +177,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(webcomicMenu);
 
-        databaseMenu.setText("Comic List");
-
-        loadDatabaseMenuItem.setText("Load Comic List");
-        loadDatabaseMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadDatabaseMenuItemActionPerformed(evt);
-            }
-        });
-        databaseMenu.add(loadDatabaseMenuItem);
-
-        saveDatabaseMenuItem.setText("Save Comic List");
-        saveDatabaseMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveDatabaseMenuItemActionPerformed(evt);
-            }
-        });
-        databaseMenu.add(saveDatabaseMenuItem);
-
-        menuBar.add(databaseMenu);
-
         aboutButton.setText("About");
         aboutButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -272,14 +249,6 @@ public class MainFrame extends javax.swing.JFrame {
         database.removeComic();
     }//GEN-LAST:event_removeComicMenuItemActionPerformed
 
-    private void loadDatabaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDatabaseMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loadDatabaseMenuItemActionPerformed
-
-    private void saveDatabaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDatabaseMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saveDatabaseMenuItemActionPerformed
-
     private void aboutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutButtonMouseClicked
         // Displays a window with the license text and a link to the Google code site.
         new AboutFrame().setVisible(true);
@@ -307,19 +276,16 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel comicDataLabel;
     private javax.swing.JScrollPane comicPane;
-    private javax.swing.JMenu databaseMenu;
     private javax.swing.JMenuItem editComicMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JMenuItem loadDatabaseMenuItem;
     private javax.swing.JPanel mainComicPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton nextButton;
     private javax.swing.JMenuItem preferencesMenuItem;
     private javax.swing.JButton prevButton;
     private javax.swing.JMenuItem removeComicMenuItem;
-    private javax.swing.JMenuItem saveDatabaseMenuItem;
     private javax.swing.JMenuItem sortByNameMenuItem;
     private javax.swing.JMenuItem sortByUpdateMenuItem;
     private javax.swing.JMenu sortMenu;
