@@ -124,11 +124,11 @@ public class ComicSite implements Comparable<ComicSite> {
      * @return The Information String with the Author, Title, URL, etc.
      */
     public String getInfoString() {
-        String retval = "\"" + comicName + ",\"";
+        String retval = "\"" + comicName + "\"";
         if (!comicAuthor.equals("")) {
-            retval += "by " + comicAuthor + ", ";
+            retval += " by " + comicAuthor + ",";
         }
-        retval += "at " + comicUrl;
+        retval += " at " + comicUrl;
         return retval;
     }
 

@@ -269,7 +269,7 @@ public class MainFrame extends javax.swing.JFrame {
         //Image img = site.getStrip().getComicStripImage();
         comicLabel.setText(site.getInfoString());
         //ImageIcon ic = new ImageIcon(img);
-        //comicLabel.setIcon(ic);
+        comicLabel.setIcon(img);
         comicPane.getViewport().add(comicLabel);
     }
 
