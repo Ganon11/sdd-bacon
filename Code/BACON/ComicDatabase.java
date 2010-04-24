@@ -226,6 +226,19 @@ import java.util.Scanner;
             return it.previous();
         }
     }
+    
+    public ComicSite getCurrentcomic() {
+    	if (it.hasNext()) { // We need to know what the current comic is
+            it.next(); // so that we can still iterate from its position
+            cs = it.previous();
+        } else if (it.hasPrevious()) {
+            it.previous();
+            cs = it.next();
+        } else {
+            it = allComics.listIterator();
+            cs = null;
+        }
+        return cs;
 
     /**
      * Adds a ComicSite to the list.

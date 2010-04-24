@@ -249,10 +249,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
         ComicSite cs = ComicDialog.show(null);
         if(cs == null) {
-            //Show a warning dialog with title 'AddComicDialog', and message 'Comic not added successfully.':
-            Object[] options = {"OK"};
-            JOptionPane.showOptionDialog(null, "Comic not added successfully", "AddComicDialog",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);;
+            //Show a warning dialog with message 'Comic not added successfully.':
+            SwingInput.displayErrorMessage("Comic not added successfully.");
             return;
         }
         database.addComic(cs);
