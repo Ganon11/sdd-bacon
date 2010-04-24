@@ -231,6 +231,7 @@ public class MainFrame extends javax.swing.JFrame {
             SwingInput.displayErrorMessage("Comic not added successfully.");
             return;
         }
+        cs.getStrip().loadImage();
         database.addComic(cs);
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
 
@@ -241,6 +242,7 @@ public class MainFrame extends javax.swing.JFrame {
             SwingInput.displayErrorMessage("Comic not edited successfully.");
             return;
         }
+        cs.getStrip().loadImage();
         database.removeComic();
         database.addComic(cs);
     }//GEN-LAST:event_editComicMenuItemActionPerformed
@@ -263,6 +265,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (ComicSite cs : database.getAllComics())
             System.out.println(cs.getTitle());
         ComicSite site = (next) ? database.getNextComic() : database.getPreviousComic();
+        Icon img = site.getStrip().getComicStripImage();
         //Image img = site.getStrip().getComicStripImage();
         comicLabel.setText(site.getInfoString());
         //ImageIcon ic = new ImageIcon(img);

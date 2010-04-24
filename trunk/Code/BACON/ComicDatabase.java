@@ -145,7 +145,7 @@ import java.util.Scanner;
                 ComicStrip strip = comic.getStrip();
                 dataFile.write("Comic Name: " + comic.getTitle() + "\n");
                 dataFile.write("Comic Author: " + comic.getAuthor() + "\n");
-                String pathline = "Image Path: " + strip.getFilepath();
+                String pathline = "Image Path: " + strip.getFilePath();
                 dataFile.write(pathline + "\n");
                 dataFile.write("Comic Index: " + comic.getIndex() + "\n");
             }
