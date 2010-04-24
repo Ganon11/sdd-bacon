@@ -297,7 +297,7 @@ public class ComicDialog extends javax.swing.JDialog {
         clearImages();
         txtURL.setText(url);
         txtURL.setEnabled(false);
-        imageURLs = BaconSystem.getImageURLs(url);
+        imageURLs = BaconSystem.getImageUrls(url);
         if(!hasImages()) { //Site issue
             if(imageURLs == null) {
                 //Error - Couldn't load page
