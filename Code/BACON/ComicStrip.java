@@ -33,16 +33,18 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.Icon;
 
 public class ComicStrip {
-    private Image comicStripImage;      // The actual Image of the comic strip.
-    private String filepath;
+    private Icon comicStripImage;      // The actual Image of the comic strip.
+    private String filePath;
 
     /**
      * Constructs the ComicStirp object with null values.
      */
     public ComicStrip() {
-        filepath = null;
+        filePath = null;
         comicStripImage = null;
     }
 
@@ -52,7 +54,7 @@ public class ComicStrip {
      * @param fileName the full path to an image file.
      */
     public ComicStrip(String fileName) {
-        filepath = fileName;
+        filePath = fileName;
         comicStripImage = null;
     }
 
@@ -62,7 +64,7 @@ public class ComicStrip {
      * @param fileName the full path to an image file.
      */
     public void loadImage(String fileName) {
-        filepath = fileName;
+        filePath = fileName;
         this.loadImage();
     }
 
@@ -70,14 +72,7 @@ public class ComicStrip {
      * Loads the image file into comicStripImage.
      */
      public void loadImage() {
-        comicStripImage = null;
-        try {
-            comicStripImage = ImageIO.read(new File(filepath));
-        } catch (IOException e) {
-            System.err.println("Could not load the image from the specified file path: " + filepath);
-            // Here, we should handle the exception - maybe display an error
-            // message like "Could not load file fileName".
-        }
+         comicStripImage = new ImageIcon(filePath);
      }
 
     /**
@@ -86,7 +81,7 @@ public class ComicStrip {
      * @return  the Comic Strip Image.
      * @see     Image
      */
-    public Image getComicStripImage() {
+    public Icon getComicStripImage() {
         return comicStripImage;
     }
 
@@ -95,7 +90,7 @@ public class ComicStrip {
      *
      * @return The path to the image file as a String.
      */
-    public String getFilepath() {
-        return filepath;
+    public String getFilePath() {
+        return filePath;
     }
 }
