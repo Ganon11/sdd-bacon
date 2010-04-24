@@ -53,6 +53,7 @@ import java.util.Scanner;
     public ComicDatabase(String dataFileName) {
         DATA_FILE = dataFileName;
         allComics = new LinkedList<ComicSite>();
+        it = allComics.listIterator();
     }
 
     /**
@@ -62,6 +63,7 @@ import java.util.Scanner;
     public ComicDatabase() {
         DATA_FILE = ".datafile.dat";
         allComics = new LinkedList<ComicSite>();
+        it = allComics.listIterator();
     }
 
     /**
@@ -187,6 +189,7 @@ import java.util.Scanner;
             it.previous();
             cs = it.next();
         } else {
+            it = allComics.listIterator();
             return; // Shutting up the compiler...
         }
         Collections.sort(allComics); // Yes, this is an "unchecked or unsafe operation"
@@ -230,6 +233,8 @@ import java.util.Scanner;
      */
     public void addComic(ComicSite cs) {
         allComics.addFirst(cs);
+        int pos = Collections.binarySearch(allComics, cs);
+        it = (pos < 0) ? allComics.listIterator() : allComics.listIterator(pos);
         sortComicList();
     }
 }

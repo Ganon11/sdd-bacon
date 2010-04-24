@@ -290,19 +290,10 @@ public class MainFrame extends javax.swing.JFrame {
         ComicSite site = (next) ? database.getNextComic() : database.getPreviousComic();
         Image img = site.getStrip().getComicStripImage();
         JLabel lab = new JLabel(site.getInfoString());
-        ImageIcon ic = new ImageIcon(img);
-        lab.setIcon(ic);
-        mainComicPanel.add(lab);
+        //ImageIcon ic = new ImageIcon(img);
+        //lab.setIcon(ic);
+        comicPane.add(lab);
     }
-
-//    /**
-//     * We may wish to remove this main...thoughts?
-//     *  I think we should ditch it, to be honest.
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        new MainFrame(null).setVisible(true);
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu aboutButton;
