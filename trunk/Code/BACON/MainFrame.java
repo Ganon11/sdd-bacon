@@ -85,6 +85,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        comicDataLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        comicDataLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        comicDataLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        comicDataLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         comicPane.setViewportView(comicDataLabel);
 
         javax.swing.GroupLayout mainComicPanelLayout = new javax.swing.GroupLayout(mainComicPanel);
