@@ -72,9 +72,7 @@ public class ComicStrip {
      * Loads the image file into comicStripImage.
      */
      public void loadImage() {
-         System.out.println("FISH");
          comicStripImage = new ImageIcon(filePath);
-         System.out.println("SANDWICH");
      }
 
     /**
