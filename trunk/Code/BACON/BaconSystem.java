@@ -120,7 +120,7 @@ public class BaconSystem {
      * @param  url  the URL of the webpage to read
      * @return      an array of all image URLs gathered from the page
      */
-    public static URL[] getImageURLs(String url) {
+    public static URL[] getImageUrls(String url) {
         TagMapper tm = TagMapper.parse(url);
         if(tm == null) return null;
 
