@@ -257,7 +257,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
 
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
-        // TODO add your handling code here:
+        ComicSite cs = ComicDialog.show(database.getCurrentComic());
+        if(cs == null) {
+            //Show a warning dialog with message 'Comic not added successfully.':
+            SwingInput.displayErrorMessage("Comic not edited successfully.");
+            return;
+        }
+        database.addComic(cs);
     }//GEN-LAST:event_editComicMenuItemActionPerformed
 
     private void removeComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeComicMenuItemActionPerformed
