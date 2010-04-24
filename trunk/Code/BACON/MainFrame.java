@@ -270,7 +270,7 @@ public class MainFrame extends javax.swing.JFrame {
         comicLabel.setText(site.getInfoString());
         //ImageIcon ic = new ImageIcon(img);
         comicLabel.setIcon(img);
-        comicPane.getViewport().add(comicLabel);
+        //comicPane.getViewport().add(comicLabel);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
