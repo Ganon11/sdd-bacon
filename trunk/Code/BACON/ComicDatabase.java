@@ -227,7 +227,8 @@ import java.util.Scanner;
         }
     }
     
-    public ComicSite getCurrentcomic() {
+    public ComicSite getCurrentComic() {
+    	ComicSite cs;
     	if (it.hasNext()) { // We need to know what the current comic is
             it.next(); // so that we can still iterate from its position
             cs = it.previous();
@@ -239,7 +240,7 @@ import java.util.Scanner;
             cs = null;
         }
         return cs;
-
+	}
     /**
      * Adds a ComicSite to the list.
      * @param cs The ComicSite to be added
