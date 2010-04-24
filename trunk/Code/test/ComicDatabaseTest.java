@@ -89,4 +89,44 @@ public class ComicDatabaseTest {
         ComicSite sc = db.getAllComics().get(0);
         assertEquals(cs, sc);
     }
+
+    /**
+     * Tests that getting the next comic works with one comic.
+     */
+    @Test
+    public void test_GetNextOneComic() {
+        ComicDatabase db = new ComicDatabase();
+        ComicSite cs = new ComicSite("xkcd", "Randall Munroe", "http://www.xkcd.com", 1);
+        db.addComic(cs);
+        assertEquals(cs, db.getNextComic());
+    }
+
+    /**
+     * Tests that getting the previous comic works with one comic.
+     */
+    @Test
+    public void test_GetPreviousOneComic() {
+        ComicDatabase db = new ComicDatabase();
+        ComicSite cs = new ComicSite("xkcd", "Randall Munroe", "http://www.xkcd.com", 1);
+        db.addComic(cs);
+        assertEquals(cs, db.getPreviousComic());
+    }
+
+    /**
+     * Tests getNextComic and getPreviousComic when the list has multiple elements.
+     */
+    @Test
+    public void test_GetNextPreviousComic() {
+        ComicDatabase db = new ComicDatabase();
+        ComicSite cs = new ComicSite("xkcd", "Randall Munroe", "http://www.xkcd.com", 1);
+        ComicSite sc = new ComicSite("CAD", "Tim Buckley", "http://www.cad-comic.com", 1);
+        db.addComic(cs);
+        db.addComic(sc);
+        assertEquals(sc, db.getNextComic());
+        assertEquals(sc, db.getPreviousComic());
+        assertEquals(sc, db.getNextComic());
+        assertEquals(cs, db.getNextComic());
+        assertEquals(sc, db.getNextComic());
+    }
+
 }
