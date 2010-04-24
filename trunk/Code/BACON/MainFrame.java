@@ -37,6 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         database = db;
         setTitle("BACON");
+        comicLabel = new JLabel();
     }
 
     /** This method is called from within the constructor to
@@ -259,7 +260,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
         ComicSite cs = ComicDialog.show(database.getCurrentComic());
         if(cs == null) {
-            //Show a warning dialog with message 'Comic not added successfully.':
+            //Show a warning dialog with message 'Comic not edited successfully.':
             SwingInput.displayErrorMessage("Comic not edited successfully.");
             return;
         }
@@ -293,11 +294,11 @@ public class MainFrame extends javax.swing.JFrame {
         for (ComicSite cs : database.getAllComics())
             System.out.println(cs.getTitle());
         ComicSite site = (next) ? database.getNextComic() : database.getPreviousComic();
-        Image img = site.getStrip().getComicStripImage();
-        JLabel lab = new JLabel(site.getInfoString());
+        //Image img = site.getStrip().getComicStripImage();
+        comicLabel.setText(site.getInfoString());
         //ImageIcon ic = new ImageIcon(img);
-        //lab.setIcon(ic);
-        comicPane.add(lab);
+        //comicLabel.setIcon(ic);
+        comicPane.getViewport().add(comicLabel);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -325,5 +326,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu webcomicMenu;
     // End of variables declaration//GEN-END:variables
     private ComicDatabase database;
+    private javax.swing.JLabel comicLabel;
 
 }
