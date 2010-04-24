@@ -30,9 +30,9 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="panPreview" alignment="0" pref="424" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblWebURL" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblWebUrl" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtURL" pref="355" max="32767" attributes="0"/>
+                      <Component id="txtUrl" pref="355" max="32767" attributes="0"/>
                   </Group>
                   <Component id="btnLoadImages" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTitleText" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -47,8 +47,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblWebURL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtURL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblWebUrl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUrl" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnLoadImages" min="-2" max="-2" attributes="0"/>
@@ -64,14 +64,14 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="txtURL">
+    <Component class="javax.swing.JTextField" name="txtUrl">
       <Properties>
         <Property name="text" type="java.lang.String" value="http://"/>
         <Property name="toolTipText" type="java.lang.String" value="The URL where the comic can be found"/>
       </Properties>
       <Events>
-        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtURLFocusGained"/>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtURLFocusLost"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtUrlFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtUrlFocusLost"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLoadImages">
@@ -82,7 +82,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadImagesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblWebURL">
+    <Component class="javax.swing.JLabel" name="lblWebUrl">
       <Properties>
         <Property name="text" type="java.lang.String" value="Website URL:"/>
       </Properties>
@@ -95,6 +95,8 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="verticalAlignment" type="int" value="1"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="1"/>
           </Properties>
         </Component>
       </SubComponents>
