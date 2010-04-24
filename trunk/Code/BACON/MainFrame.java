@@ -263,11 +263,12 @@ public class MainFrame extends javax.swing.JFrame {
             SwingInput.displayErrorMessage("Comic not edited successfully.");
             return;
         }
+        database.removeComic();
         database.addComic(cs);
     }//GEN-LAST:event_editComicMenuItemActionPerformed
 
     private void removeComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeComicMenuItemActionPerformed
-        // TODO add your handling code here:
+        database.removeComic();
     }//GEN-LAST:event_removeComicMenuItemActionPerformed
 
     private void loadDatabaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDatabaseMenuItemActionPerformed

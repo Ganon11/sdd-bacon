@@ -227,6 +227,12 @@ import java.util.Scanner;
         }
     }
     
+    /**
+    * Returns the current comic as a Comic site. Uses if-else statements to get around
+    * Java's inability to return current iterator items.
+    *
+    * @return The current ComicSite in the list.
+    */
     public ComicSite getCurrentComic() {
     	ComicSite cs;
     	if (it.hasNext()) { // We need to know what the current comic is
@@ -250,5 +256,12 @@ import java.util.Scanner;
         int pos = Collections.binarySearch(allComics, cs);
         it = (pos < 0) ? allComics.listIterator() : allComics.listIterator(pos);
         sortComicList();
+    }
+    
+    /**
+    * Removes a ComicSite from the list
+    */
+    public void removeComic() {
+    	it.remove();
     }
 }
