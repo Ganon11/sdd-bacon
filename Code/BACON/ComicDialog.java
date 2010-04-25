@@ -355,8 +355,8 @@ public class ComicDialog extends javax.swing.JDialog {
         } else clearImages();
     }
 
-    public static ComicSite show(ComicSite cs) {
-        ComicDialog dialog = new ComicDialog(new javax.swing.JFrame(), true, cs);
+    public static ComicSite show(java.awt.Frame parent, ComicSite cs) {
+        ComicDialog dialog = new ComicDialog(parent, true, cs);
         dialog.setVisible(true);
         return dialog.getComicSite();
     }
