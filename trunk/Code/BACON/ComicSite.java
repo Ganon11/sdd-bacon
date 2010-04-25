@@ -131,6 +131,15 @@ public class ComicSite implements Comparable<ComicSite> {
         retval += " at " + comicUrl;
         return retval;
     }
+    
+    /**
+     * Returns the Information String of the ComicSite.
+     *
+     * @return The Information String with the Author, Title, URL, etc.
+     */
+    public String toString() {
+        return getInfoString();
+    }
 
     /**
      * Comparator. Uses whatever type is held in sortType to sort.
