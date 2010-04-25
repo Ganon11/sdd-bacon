@@ -201,11 +201,11 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
-        displayNextImage(false);
+        displayNextComic(false);
     }//GEN-LAST:event_prevButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        displayNextImage(true);
+        displayNextComic(true);
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
@@ -226,24 +226,26 @@ public class MainFrame extends javax.swing.JFrame {
     private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
         ComicSite cs = ComicDialog.show(null);
         if(cs == null) {
-            //Show a warning dialog with message 'Comic not added successfully.':
-            SwingInput.displayErrorMessage("Comic not added successfully.");
+            //Dialog cancelled, do nothing
+            //SwingInput.displayErrorMessage("Comic not created/added.");
             return;
         }
-        cs.getStrip().loadImage();
+        //cs.getStrip().loadImage();
         database.addComic(cs);
+        displayCurrentComic();
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
 
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
         ComicSite cs = ComicDialog.show(database.getCurrentComic());
         if(cs == null) {
-            //Show a warning dialog with message 'Comic not edited successfully.':
-            SwingInput.displayErrorMessage("Comic not edited successfully.");
+            //Dialog cancelled, do nothing
+            //SwingInput.displayErrorMessage("Comic not edited.");
             return;
         }
-        cs.getStrip().loadImage();
+        //cs.getStrip().loadImage();
         database.removeComic();
         database.addComic(cs);
+        displayCurrentComic();
     }//GEN-LAST:event_editComicMenuItemActionPerformed
 
     private void removeComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeComicMenuItemActionPerformed
@@ -254,22 +256,47 @@ public class MainFrame extends javax.swing.JFrame {
         // Displays a window with the license text and a link to the Google code site.
         new AboutFrame().setVisible(true);
     }//GEN-LAST:event_aboutButtonMouseClicked
-
+    
     /**
-     * Displays the next or previous image.
+     * Displays the current comic in the database.
+     */
+    public void displayCurrentComic() {
+        displayComic(database.getCurrentComic());
+    }
+    
+    /**
+     * Displays the next or previous comic from the database.
      *
      * @param next If true, the next image is displayed. If false, the previous is.
      */
-    public void displayNextImage(boolean next) {
+    public void displayNextComic(boolean next) {
+        if (next) displayComic(database.getNextComic());
+        else displayComic(database.getPreviousComic());
+    }
+    
+    /**
+     * Displays the image and text from the corresponding ComicSite.
+     *
+     * @param site The ComicSite to display, or null to display nothing
+     */
+    public void displayComic(ComicSite site) {
         for (ComicSite cs : database.getAllComics())
-            System.out.println(cs.getTitle());
-        ComicSite site = (next) ? database.getNextComic() : database.getPreviousComic();
-        Icon img = site.getStrip().getComicStripImage();
-        //Image img = site.getStrip().getComicStripImage();
-        comicLabel.setText(site.getInfoString());
-        //ImageIcon ic = new ImageIcon(img);
-        comicLabel.setIcon(img);
-        //comicPane.getViewport().add(comicLabel);
+            System.out.println(cs.getTitle() + ":\t" + cs.getStrip().getFilePath());
+        if (site != null) {
+            site.getStrip().loadImage();
+            Icon img = site.getStrip().getComicStripImage();
+            //Image img = site.getStrip().getComicStripImage();
+            //comicLabel.setText(site.getInfoString());
+            //ImageIcon ic = new ImageIcon(img);
+            comicLabel.setIcon(img);
+            System.out.format("Trying to load Icon from %s\n", site.getStrip().getFilePath());
+            comicLabel.setIcon(new ImageIcon(site.getStrip().getFilePath()));
+            System.out.println("Loaded... presumably.");
+            //comicPane.getViewport().add(comicLabel);
+        } else {
+            //comicLabel.setText("");
+            comicLabel.setIcon(null);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
