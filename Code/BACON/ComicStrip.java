@@ -32,6 +32,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
@@ -39,6 +40,7 @@ import javax.swing.Icon;
 public class ComicStrip {
     private Icon comicStripImage;      // The actual Image of the comic strip.
     private String filePath;
+    private boolean isUrl;             //true if filePath is actually a url
 
     /**
      * Constructs the ComicStirp object with null values.
@@ -46,6 +48,7 @@ public class ComicStrip {
     public ComicStrip() {
         filePath = null;
         comicStripImage = null;
+        isUrl = false;
     }
 
     /**
@@ -56,6 +59,18 @@ public class ComicStrip {
     public ComicStrip(String fileName) {
         filePath = fileName;
         comicStripImage = null;
+        isUrl = false;
+    }
+    
+    /**
+     * Sets the filepath to an image URL, but does not load the image.
+     *
+     * @param url the URL to an image file.
+     */
+    public ComicStrip(URL url) {
+        filePath = url.toString();
+        comicStripImage = null;
+        isUrl = true;
     }
 
     /**
@@ -65,14 +80,37 @@ public class ComicStrip {
      */
     public void loadImage(String fileName) {
         filePath = fileName;
+        isUrl = false;
+        this.loadImage();
+    }
+    
+    /**
+     * Loads the image specified by url into comicStripImage.
+     *
+     * @param url the URL to an image file.
+     */
+    public void loadImage(URL url) {
+        filePath = url.toString();
+        isUrl = true;
         this.loadImage();
     }
 
     /**
      * Loads the image file into comicStripImage.
      */
-     public void loadImage() {
-         comicStripImage = new ImageIcon(filePath);
+    public void loadImage() {
+        //System.out.format("LOADING %s\n", filePath);
+        if (!isUrl) {
+            comicStripImage = new ImageIcon(filePath);
+        } else {
+            try {
+                comicStripImage = new ImageIcon(new URL(filePath));
+            } catch(java.net.MalformedURLException e) {
+                //URL isn't valid...
+                System.err.format("ComicStrip path %s is not a valid URL\n", filePath);
+                comicStripImage = new ImageIcon(filePath);
+            }
+        }
      }
 
     /**
@@ -92,5 +130,14 @@ public class ComicStrip {
      */
     public String getFilePath() {
         return filePath;
+    }
+    
+    /**
+     * Returns true if the image was specified by a URL rather than a path from the filesystem.
+     *
+     * @return true if the strip's image was specified by URL.
+     */
+    public boolean isOnline() {
+        return isUrl;
     }
 }

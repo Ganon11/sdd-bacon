@@ -28,6 +28,7 @@
 package BACON;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -37,7 +38,6 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         database = db;
         setTitle("BACON");
-        comicLabel = new JLabel();
     }
 
     /** This method is called from within the constructor to
@@ -99,13 +99,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(prevButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(267, Short.MAX_VALUE))
-            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                .addContainerGap(273, Short.MAX_VALUE))
+            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
         );
         mainComicPanelLayout.setVerticalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainComicPanelLayout.createSequentialGroup()
-                .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prevButton)
@@ -158,7 +158,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         webcomicMenu.add(addWebcomicMenuItem);
 
-        editComicMenuItem.setText("Edit Existing Webcomic");
+        editComicMenuItem.setText("Edit Current Webcomic");
         editComicMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editComicMenuItemActionPerformed(evt);
@@ -199,14 +199,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
-        displayNextComic(false);
-    }//GEN-LAST:event_prevButtonActionPerformed
-
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        displayNextComic(true);
-    }//GEN-LAST:event_nextButtonActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         database.saveDatabase();
@@ -250,12 +242,21 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void removeComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeComicMenuItemActionPerformed
         database.removeComic();
+        displayCurrentComic();
     }//GEN-LAST:event_removeComicMenuItemActionPerformed
 
     private void aboutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutButtonMouseClicked
         // Displays a window with the license text and a link to the Google code site.
         new AboutFrame().setVisible(true);
     }//GEN-LAST:event_aboutButtonMouseClicked
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        displayNextComic(true);
+}//GEN-LAST:event_nextButtonActionPerformed
+
+    private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
+        displayNextComic(false);
+}//GEN-LAST:event_prevButtonActionPerformed
     
     /**
      * Displays the current comic in the database.
@@ -280,21 +281,17 @@ public class MainFrame extends javax.swing.JFrame {
      * @param site The ComicSite to display, or null to display nothing
      */
     public void displayComic(ComicSite site) {
-        for (ComicSite cs : database.getAllComics())
-            System.out.println(cs.getTitle() + ":\t" + cs.getStrip().getFilePath());
+        //for (ComicSite cs : database.getAllComics())
+        //    System.out.println(cs.getTitle() + ":\t" + cs.getStrip().getFilePath());
         if (site != null) {
             site.getStrip().loadImage();
+            setTitle(site.getTitle() + " - BACON");
+            comicLabel.setText(site.getInfoString());
             Icon img = site.getStrip().getComicStripImage();
-            //Image img = site.getStrip().getComicStripImage();
-            //comicLabel.setText(site.getInfoString());
-            //ImageIcon ic = new ImageIcon(img);
             comicLabel.setIcon(img);
-            System.out.format("Trying to load Icon from %s\n", site.getStrip().getFilePath());
-            comicLabel.setIcon(new ImageIcon(site.getStrip().getFilePath()));
-            System.out.println("Loaded... presumably.");
-            //comicPane.getViewport().add(comicLabel);
         } else {
-            //comicLabel.setText("");
+            setTitle("BACON");
+            comicLabel.setText("");
             comicLabel.setIcon(null);
         }
     }

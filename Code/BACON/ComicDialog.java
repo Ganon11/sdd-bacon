@@ -13,6 +13,7 @@ package BACON;
 
 import java.net.URL;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -234,11 +235,19 @@ public class ComicDialog extends javax.swing.JDialog {
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         if(hasImages()) {
-            comicSite = new ComicSite(getComicName(), getComicAuthor(), getComicUrl(), cIndex);
-            comicSite.setStrip(new ComicStrip(imageUrls[cIndex].toString()));
-            this.dispose();
+            if(!getComicName().isEmpty()) {
+                comicSite = new ComicSite(getComicName(), getComicAuthor(), getComicUrl(), cIndex);
+                comicSite.setStrip(new ComicStrip(imageUrls[cIndex]));
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Please enter the name of the comic.",
+                    "Enter Comic Name", JOptionPane.PLAIN_MESSAGE);
+            }
         } else {
             //Tell user that they must enter and load a valid URL
+            JOptionPane.showMessageDialog(this,
+                "Please enter a valid website URL and load the images from it.",
+                "Enter Website URL", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
 
@@ -303,10 +312,12 @@ public class ComicDialog extends javax.swing.JDialog {
         if(!hasImages()) { //Site issue
             if(imageUrls == null) {
                 //Error - Couldn't load page
-
+                JOptionPane.showMessageDialog(this, "The webpage entered is not valid.",
+                    "Your URL Sucks", JOptionPane.ERROR_MESSAGE);
             } else {
                 //Error - No images
-
+                JOptionPane.showMessageDialog(this,
+                        "No images were found on the webpage entered.", "No Images Found", JOptionPane.ERROR_MESSAGE);
             }
             imageUrls = null;
             txtUrl.setEnabled(true);
