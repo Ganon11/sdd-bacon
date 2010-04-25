@@ -37,7 +37,6 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame(ComicDatabase db) {
         initComponents();
         database = db;
-        setTitle("BACON");
     }
 
     /** This method is called from within the constructor to
@@ -70,8 +69,16 @@ public class MainFrame extends javax.swing.JFrame {
         aboutButton = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("BACON");
+        setLocationByPlatform(true);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         prevButton.setText("Previous");
+        prevButton.setFocusable(false);
         prevButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prevButtonActionPerformed(evt);
@@ -79,6 +86,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         nextButton.setText("Next");
+        nextButton.setFocusable(false);
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextButtonActionPerformed(evt);
@@ -99,13 +107,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(prevButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
-            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addContainerGap(418, Short.MAX_VALUE))
+            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
         mainComicPanelLayout.setVerticalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainComicPanelLayout.createSequentialGroup()
-                .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prevButton)
@@ -216,7 +224,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sortByUpdateMenuItemActionPerformed
 
     private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
-        ComicSite cs = ComicDialog.show(null);
+        ComicSite cs = ComicDialog.show(this, null);
         if(cs == null) {
             //Dialog cancelled, do nothing
             //SwingInput.displayErrorMessage("Comic not created/added.");
@@ -228,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
 
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
-        ComicSite cs = ComicDialog.show(database.getCurrentComic());
+        ComicSite cs = ComicDialog.show(this, database.getCurrentComic());
         if(cs == null) {
             //Dialog cancelled, do nothing
             //SwingInput.displayErrorMessage("Comic not edited.");
@@ -257,6 +265,18 @@ public class MainFrame extends javax.swing.JFrame {
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
         displayNextComic(false);
 }//GEN-LAST:event_prevButtonActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        //System.out.format("KEY PRESSED: %d\n", evt.getKeyCode());
+        switch(evt.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                displayNextComic(false);
+                break;
+            case KeyEvent.VK_RIGHT:
+                displayNextComic(true);
+                break;
+        }
+    }//GEN-LAST:event_formKeyPressed
     
     /**
      * Displays the current comic in the database.
