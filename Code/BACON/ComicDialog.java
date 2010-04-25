@@ -70,7 +70,7 @@ public class ComicDialog extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(300, 400));
 
         txtUrl.setText("http://");
-        txtUrl.setToolTipText("The URL where the comic can be found");
+        txtUrl.setToolTipText("The URL where the newest comic can be found daily");
         txtUrl.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtUrlFocusGained(evt);
@@ -272,7 +272,7 @@ public class ComicDialog extends javax.swing.JDialog {
     }
 
     public String getComicAuthor() {
-        return txtAuthor.getText();
+        return txtAuthor.getText().trim();
     }
 
     public int getComicIndex() {
@@ -280,7 +280,7 @@ public class ComicDialog extends javax.swing.JDialog {
     }
 
     public String getComicName() {
-        return txtName.getText();
+        return txtName.getText().trim();
     }
 
     public ComicSite getComicSite() {

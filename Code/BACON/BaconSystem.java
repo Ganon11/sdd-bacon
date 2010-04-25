@@ -33,7 +33,7 @@ import BACON.SwingInput;
 
 import java.io.File;
 import java.io.IOException;
-//import java.io.InputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 //import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -122,10 +122,10 @@ public class BaconSystem {
      */
     public static URL[] getImageUrls(String url) {
         TagMapper tm = TagMapper.parse(url);
-        if(tm == null) return null;
+        if (tm == null) return null;
 
         ArrayList<AttributeSet> imgs = tm.getTagMap().get(HTML.Tag.IMG);
-        if(imgs == null) return new URL[0];
+        if (imgs == null) return new URL[0];
 
 
         URL base;
@@ -157,12 +157,12 @@ public class BaconSystem {
      * @return      the URL of the nth image on the page, or null if it cannot be retrieved
      */
     public static URL getImageN(String url, int n) {
-        if(n < 0) return null; //BAD USER!
+        if (n < 0) return null; //BAD USER!
         TagMapper tm = TagMapper.parse(url);
-        if(tm == null) return null;
+        if (tm == null) return null;
 
         ArrayList<AttributeSet> imgs = tm.getTagMap().get(HTML.Tag.IMG);
-        if(imgs == null || n >= imgs.size()) return null;
+        if (imgs == null || n >= imgs.size()) return null;
 
         try {
             return new URL(new URL(url), imgs.get(n).getAttribute(HTML.Attribute.SRC).toString());
@@ -211,8 +211,8 @@ public class BaconSystem {
                 InputStreamReader r = new InputStreamReader(url.openStream(), "ISO-8859-1");
                 tagMap = new HashMap<HTML.Tag, ArrayList<AttributeSet>>();
                 parser.parse(r, this, true);
-            } catch(IOException e) {
-                System.err.println("IO Exception Thrown: " + e);
+            } catch(Exception e) {
+                System.err.format("Could not read URL \"%s\":\n\t%s\n", url, e);
             }
         }
 
@@ -221,7 +221,7 @@ public class BaconSystem {
          */
         private void mapTag(HTML.Tag t, AttributeSet a) {
             ArrayList<AttributeSet> list = tagMap.get(t);
-            if(list == null) {
+            if (list == null) {
                 list = new ArrayList<AttributeSet>();
                 tagMap.put(t, list);
             }
@@ -256,12 +256,13 @@ public class BaconSystem {
             }
 
             try {
-                InputStreamReader r = new InputStreamReader(url.openStream(), "ISO-8859-1");
+                InputStream s = url.openStream();
+                InputStreamReader r = new InputStreamReader(s, "ISO-8859-1");
                 TagMapper tm = new TagMapper(new HashMap<HTML.Tag, ArrayList<AttributeSet>>());
                 parser.parse(r, tm, true);
                 return tm;
-            } catch(IOException e) {
-                System.err.println("IO Exception Thrown: " + e);
+            } catch(Exception e) {
+                System.err.format("Could not read URL \"%s\":\n\t%s\n", url, e);
             }
             return null;
         }

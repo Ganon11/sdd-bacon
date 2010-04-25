@@ -35,16 +35,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.ArrayList;//LinkedList;
 import java.util.List;
-import java.util.ListIterator;
+//import java.util.ListIterator;
 import java.util.Scanner;
 
  public class ComicDatabase {
     private final String DATA_FILE;
-    private LinkedList<ComicSite> allComics;
+    private ArrayList<ComicSite> allComics;
     private Date dateLoaded;
-    private ListIterator<ComicSite> it;
+    private int current;
+    //private ListIterator<ComicSite> it;
 
     /**
      * Creates the ComicDatabase with the data file stored in the specified
@@ -52,8 +53,8 @@ import java.util.Scanner;
      */
     public ComicDatabase(String dataFileName) {
         DATA_FILE = dataFileName;
-        allComics = new LinkedList<ComicSite>();
-        it = allComics.listIterator();
+        allComics = new ArrayList<ComicSite>();
+        current = -1;
     }
 
     /**
@@ -62,8 +63,8 @@ import java.util.Scanner;
      */
     public ComicDatabase() {
         DATA_FILE = ".datafile.dat";
-        allComics = new LinkedList<ComicSite>();
-        it = allComics.listIterator();
+        allComics = new ArrayList<ComicSite>();
+        current = -1;
     }
 
     /**
@@ -77,6 +78,7 @@ import java.util.Scanner;
      */
     public void loadDatabase() throws FileNotFoundException {
         allComics.clear();
+        current = 0;
         try {
             Scanner dataFile = new Scanner(new FileReader(DATA_FILE));
             String dateSaved = dataFile.nextLine();
@@ -107,12 +109,12 @@ import java.util.Scanner;
                 strip = new ComicStrip(filePath);
                 comic = new ComicSite(title, author, url, index);
                 comic.setStrip(strip);
-                allComics.addFirst(comic);
-                it = allComics.listIterator();
+                allComics.add(comic);
             }
         } catch (FileNotFoundException e) {
             throw e;
         }
+        sortComicList();
     }
 
     /**
@@ -124,7 +126,8 @@ import java.util.Scanner;
      *
      * @param newComics List of currently loaded/displayed ComicSites and ComicStrips.
      */
-    public void saveDatabase(LinkedList<ComicSite> newComics) {
+    public void saveDatabase(ArrayList<ComicSite> newComics) {
+        //This should check if newComics is valid...
         allComics = newComics;
         this.saveDatabase();
     }
@@ -159,9 +162,9 @@ import java.util.Scanner;
     /**
      * Fetches the loaded list of all comics.
      *
-     * @return A LinkedList of ComicSites, each of which has the proper image loaded.
+     * @return An ArrayList of ComicSites, each of which has the proper image loaded.
      */
-    public LinkedList<ComicSite> getAllComics() {
+    public ArrayList<ComicSite> getAllComics() {
         return allComics;
     }
 
@@ -178,82 +181,72 @@ import java.util.Scanner;
      * Re-sorts the list, presumably after ComicSite's sortMethod has changed.
      */
     public void sortComicList() {
-        ComicSite cs;
-        if (allComics.size() <= 1) { // Lists of size 0 or 1 shouldn't be sorted
-            return;
-        }
-        cs = getCurrentComic();
+        if (allComics.size() <= 1) return; // Lists of size 0 or 1 shouldn't be sorted
+        ComicSite cs = getCurrentComic();
         Collections.sort(allComics); // Yes, this is an "unchecked or unsafe operation"
-        int pos = Collections.binarySearch(allComics, cs);
-        it = (pos < 0) ? allComics.listIterator() : allComics.listIterator(pos);
+        current = Collections.binarySearch(allComics, cs);
     }
 
     /**
-     * Returns the next Comic Site for display. Circles to the first if the current site
+     * Moves to and returns the next ComicSite for display. Circles to the first if the current site
      * is the last in the list.
      *
-     * @return The next Comic Site in the list, circling to the first if necessary.
+     * @return The next ComicSite in the list, circling to the first if necessary, or null if the list is empty.
      */
     public ComicSite getNextComic() {
-        if (it.hasNext()) {
-            return it.next();
-        } else {
-            it = allComics.listIterator();
-            return it.next();
-        }
+        if (allComics.isEmpty()) return null;
+        if (current < 0 || ++current >= allComics.size()) current = 0;
+        return allComics.get(current);
     }
 
     /**
-     * Returns the previous Comic Site for display. Circles to the last if the current site
+     * Moves to and returns the previous ComicSite for display. Circles to the last if the current site
      * is the first in the list.
      *
-     * @return The next Comic Site in the list, circling to the first if necessary.
+     * @return The next Comic Site in the list, circling to the first if necessary, or null if the list is empty.
      */
     public ComicSite getPreviousComic() {
-        if (it.hasPrevious()) {
-            return it.previous();
-        } else {
-            it = allComics.listIterator(allComics.size());
-            return it.previous();
-        }
+        if (allComics.isEmpty()) return null;
+        if (current >= allComics.size() || --current < 0) current = allComics.size() - 1;
+        return allComics.get(current);
     }
     
     /**
-    * Returns the current comic as a Comic site. Uses if-else statements to get around
-    * Java's inability to return current iterator items.
+    * Returns the current comic as a ComicSite.
     *
-    * @return The current ComicSite in the list.
+    * @return The current ComicSite in the list, or null if the list is empty.
     */
     public ComicSite getCurrentComic() {
-    	ComicSite cs;
-    	if (it.hasNext()) { // We need to know what the current comic is
-            it.next(); // so that we can still iterate from its position
-            cs = it.previous();
-        } else if (it.hasPrevious()) {
-            it.previous();
-            cs = it.next();
-        } else {
-            it = allComics.listIterator();
-            cs = null;
-        }
-        return cs;
-	}
+        if (allComics.isEmpty()) return null;
+        if (current < 0 || current >= allComics.size()) current = 0;
+        return allComics.get(current);
+    }
     /**
      * Adds a ComicSite to the list.
      * @param cs The ComicSite to be added
      */
     public void addComic(ComicSite cs) {
-        allComics.addFirst(cs);
-        //This code needs to be fixed
         int pos = Collections.binarySearch(allComics, cs);
-        it = (pos < 0) ? allComics.listIterator() : allComics.listIterator(pos);
-        sortComicList();
+        
+        if (pos < 0) {
+            //pos == (-(insertion point) - 1)
+            current = -(pos + 1);
+            allComics.add(current, cs);
+        } else {
+            //The comic has already been found in the database...
+        }
     }
     
     /**
     * Removes a ComicSite from the list
     */
     public void removeComic() {
-    	it.remove();
+        if (allComics.isEmpty()) {
+            //Nothing to remove...
+            return;
+        }
+        if (current < 0 || current >= allComics.size()) current = 0;
+        allComics.remove(current);
+        if(current >= allComics.size()) current = 0;
     }
 }
