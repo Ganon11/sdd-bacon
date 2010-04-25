@@ -244,6 +244,7 @@ import java.util.Scanner;
      */
     public void addComic(ComicSite cs) {
         allComics.addFirst(cs);
+        //This code needs to be fixed
         int pos = Collections.binarySearch(allComics, cs);
         it = (pos < 0) ? allComics.listIterator() : allComics.listIterator(pos);
         sortComicList();
