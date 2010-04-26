@@ -31,7 +31,7 @@ public class ComicDialog extends javax.swing.JDialog {
     public ComicDialog(java.awt.Frame parent, boolean modal, ComicSite cs) {
         super(parent, modal);
         initComponents();
-        
+
         if(cs != null) {
             if(cs.getAuthor() != null) txtAuthor.setText(cs.getAuthor());
             if(cs.getTitle() != null) txtName.setText(cs.getTitle());
@@ -220,7 +220,7 @@ public class ComicDialog extends javax.swing.JDialog {
     //private Icon[] images = null; //The site images (loaded on demand)
     private int cIndex = 0; //The index of the image we are looking at
     private ComicSite comicSite = null; //The final ComicSite we will create
-    
+
     private void btnPrevImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevImageActionPerformed
         if(!hasImages()) return;
         if(--cIndex < 0) cIndex = imageUrls.length - 1;
@@ -313,7 +313,7 @@ public class ComicDialog extends javax.swing.JDialog {
             if(imageUrls == null) {
                 //Error - Couldn't load page
                 JOptionPane.showMessageDialog(this, "The webpage entered is not valid.",
-                    "Your URL Sucks", JOptionPane.ERROR_MESSAGE);
+                    "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 //Error - No images
                 JOptionPane.showMessageDialog(this,
@@ -333,13 +333,13 @@ public class ComicDialog extends javax.swing.JDialog {
         btnLoadImages.setText("Edit Website URL");
         loadPreview();
     }
-    
+
     private void loadPreview() {
         if(hasImages()) {
             if(!comicIndexOk()) cIndex = 0;
 
             URL url = imageUrls[cIndex];
-            
+
             if(url != null) {
                 lblTitleText.setText(String.format("Image %d/%d: %s",
                         cIndex + 1, imageUrls.length, url));
