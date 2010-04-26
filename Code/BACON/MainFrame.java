@@ -29,6 +29,7 @@ package BACON;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import javax.swing.*;
 
 public class MainFrame extends javax.swing.JFrame {
@@ -97,6 +98,11 @@ public class MainFrame extends javax.swing.JFrame {
         comicLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         comicLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         comicLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        comicLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comicLabelMouseClicked(evt);
+            }
+        });
         comicPane.setViewportView(comicLabel);
 
         javax.swing.GroupLayout mainComicPanelLayout = new javax.swing.GroupLayout(mainComicPanel);
@@ -107,7 +113,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(prevButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(418, Short.MAX_VALUE))
+                .addContainerGap(425, Short.MAX_VALUE))
             .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
         mainComicPanelLayout.setVerticalGroup(
@@ -188,6 +194,11 @@ public class MainFrame extends javax.swing.JFrame {
         aboutButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 aboutButtonMouseClicked(evt);
+            }
+        });
+        aboutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutButtonActionPerformed(evt);
             }
         });
         menuBar.add(aboutButton);
@@ -277,14 +288,26 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_formKeyPressed
-    
+
+    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
+        new AboutFrame().setVisible(true);
+    }//GEN-LAST:event_aboutButtonActionPerformed
+
+    private void comicLabelMouseClicked(java.awt.event.MouseEvent evt) {
+        ComicSite cs = database.getCurrentComic();
+        try {
+            BrowserLaunch.loadBrowser(cs.getUrl());
+        } catch (IOException e) {
+            SwingInput.displayErrorMessage("Could not load website: " + e.getMessage());
+        }
+    }
     /**
      * Displays the current comic in the database.
      */
     public void displayCurrentComic() {
         displayComic(database.getCurrentComic());
     }
-    
+
     /**
      * Displays the next or previous comic from the database.
      *
@@ -294,7 +317,7 @@ public class MainFrame extends javax.swing.JFrame {
         if (next) displayComic(database.getNextComic());
         else displayComic(database.getPreviousComic());
     }
-    
+
     /**
      * Displays the image and text from the corresponding ComicSite.
      *
