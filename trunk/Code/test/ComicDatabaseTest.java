@@ -60,7 +60,7 @@ public class ComicDatabaseTest {
         String testPath = "~/sdd-bacon/PanelExamples/infinitecanvaspanels.png";
         assertEquals("Girly", testComic.getTitle());
         assertEquals("Mr. Pizzuto-san", testComic.getAuthor());
-        assertEquals(testPath, testComic.getStrip().getFilepath());
+        assertEquals(testPath, testComic.getStrip().getFilePath());
         assertEquals("http://www.prettygirly.com/", testComic.getUrl());
         assertEquals(2, testComic.getIndex());
     }
