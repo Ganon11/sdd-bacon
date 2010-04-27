@@ -115,8 +115,7 @@ public class BaconSystem {
                                                + e.getMessage());
             }
         }
-        //new MainFrame(db, lpr).setVisible(true);
-        new MainFrame(db).setVisible(true);
+        new MainFrame(db, lpr).setVisible(true);
     }
 
     /**
