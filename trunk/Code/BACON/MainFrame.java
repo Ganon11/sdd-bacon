@@ -69,6 +69,8 @@ public class MainFrame extends javax.swing.JFrame {
         nextButton = new javax.swing.JButton();
         comicPane = new javax.swing.JScrollPane();
         comicLabel = new javax.swing.JLabel();
+        addComicButton = new javax.swing.JButton();
+        aboutButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         preferencesMenuItem = new javax.swing.JMenuItem();
@@ -76,8 +78,6 @@ public class MainFrame extends javax.swing.JFrame {
         sortMenu = new javax.swing.JMenu();
         sortByNameMenuItem = new javax.swing.JMenuItem();
         sortByUpdateMenuItem = new javax.swing.JMenuItem();
-        addComicButton = new javax.swing.JMenu();
-        aboutButton = new javax.swing.JMenu();
 
         editComicMenuItem.setText("Edit Comic");
         editComicMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +142,20 @@ public class MainFrame extends javax.swing.JFrame {
         });
         comicPane.setViewportView(comicLabel);
 
+        addComicButton.setText("Add Comic");
+        addComicButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addComicButtonActionPerformed(evt);
+            }
+        });
+
+        aboutButton.setText("About");
+        aboutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainComicPanelLayout = new javax.swing.GroupLayout(mainComicPanel);
         mainComicPanel.setLayout(mainComicPanelLayout);
         mainComicPanelLayout.setHorizontalGroup(
@@ -150,7 +164,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(prevButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(425, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(addComicButton)
+                .addGap(98, 98, 98)
+                .addComponent(aboutButton)
+                .addContainerGap(185, Short.MAX_VALUE))
             .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
         mainComicPanelLayout.setVerticalGroup(
@@ -160,7 +178,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prevButton)
-                    .addComponent(nextButton)))
+                    .addComponent(nextButton)
+                    .addComponent(addComicButton)
+                    .addComponent(aboutButton)))
         );
 
         fileMenu.setText("File");
@@ -198,22 +218,6 @@ public class MainFrame extends javax.swing.JFrame {
         sortMenu.add(sortByUpdateMenuItem);
 
         menuBar.add(sortMenu);
-
-        addComicButton.setText("Add Comic");
-        addComicButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addComicButtonMouseClicked(evt);
-            }
-        });
-        menuBar.add(addComicButton);
-
-        aboutButton.setText("About");
-        aboutButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                aboutButtonMouseClicked(evt);
-            }
-        });
-        menuBar.add(aboutButton);
 
         setJMenuBar(menuBar);
 
@@ -268,13 +272,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_removeComicMenuItemActionPerformed
 
-    private void aboutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutButtonMouseClicked
-        // Displays a window with the license text and a link to the Google code site.
-        new AboutFrame().setVisible(true);
-        JOptionPane.showMessageDialog(this, BaconSystem.ABOUT_TEXT, "About",
-            JOptionPane.PLAIN_MESSAGE);
-    }//GEN-LAST:event_aboutButtonMouseClicked
-
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         displayNextComic(true);
 }//GEN-LAST:event_nextButtonActionPerformed
@@ -318,7 +315,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_launchSiteMenuItemActionPerformed
 
-    private void addComicButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addComicButtonMouseClicked
+    private void addComicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addComicButtonActionPerformed
         ComicSite cs = ComicDialog.show(this, null);
         if(cs == null) {
             //Dialog cancelled, do nothing
@@ -327,7 +324,13 @@ public class MainFrame extends javax.swing.JFrame {
         }
         database.addComic(cs);
         displayCurrentComic();
-}//GEN-LAST:event_addComicButtonMouseClicked
+    }//GEN-LAST:event_addComicButtonActionPerformed
+
+    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
+        // Displays a window with the license text and a link to the Google code site.
+        JOptionPane.showMessageDialog(this, BaconSystem.ABOUT_TEXT, "About",
+            JOptionPane.PLAIN_MESSAGE);        // TODO add your handling code here:
+    }//GEN-LAST:event_aboutButtonActionPerformed
 
     /**
      * Displays a Yes/No confirmation dialog to the user and returns true if they hit Yes.
@@ -380,8 +383,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu aboutButton;
-    private javax.swing.JMenu addComicButton;
+    private javax.swing.JButton aboutButton;
+    private javax.swing.JButton addComicButton;
     private javax.swing.JLabel comicLabel;
     private javax.swing.JPopupMenu comicMenu;
     private javax.swing.JScrollPane comicPane;
