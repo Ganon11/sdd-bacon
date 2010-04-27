@@ -38,6 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame(ComicDatabase db) {
         initComponents();
         database = db;
+        //String locDB = dir;
     }
 
     /** This method is called from within the constructor to
@@ -242,6 +243,7 @@ public class MainFrame extends javax.swing.JFrame {
             return;
         }
         //cs.getStrip().loadImage();
+        
         database.addComic(cs);
         displayCurrentComic();
     }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
