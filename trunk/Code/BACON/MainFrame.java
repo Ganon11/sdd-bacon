@@ -29,17 +29,26 @@ package BACON;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.WindowAdapter;
 import java.io.IOException;
 import javax.swing.*;
 
 public class MainFrame extends javax.swing.JFrame {
 
     /** Creates new form MainFrame */
-    public MainFrame(ComicDatabase db) {
+    public MainFrame(ComicDatabase db, LocalPrefReader lp) {
         initComponents();
         database = db;
-        //String locDB = dir;
+        lpr = lp;
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                lpr.savePreferences();
+                database.saveDatabase();
+            }
+        });
     }
 
     /** This method is called from within the constructor to
@@ -224,6 +233,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         database.saveDatabase();
+        lpr.savePreferences();
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
@@ -390,5 +400,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu sortMenu;
     // End of variables declaration//GEN-END:variables
     private ComicDatabase database;
+    private LocalPrefReader lpr;
 
 }
