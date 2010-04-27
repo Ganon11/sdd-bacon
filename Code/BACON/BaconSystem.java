@@ -65,6 +65,7 @@ public class BaconSystem {
         LocalPrefReader lpr;
         if (!notFirstRun) {
             // prompt for location to save comic database and images
+            System.out.println("First run!  Finding DB storage location");
             boolean location = false;
             String locDb = "", locImages = "";
             while (!location) {
@@ -89,6 +90,7 @@ public class BaconSystem {
             lpr.setPreference("SortStyle", "A_TO_Z_ALPHABETICAL");
             db = new ComicDatabase(locDb + File.separator + ".datafile.dat");
         } else {
+            System.out.println("Not first run!  Getting DB pref");
             lpr = new LocalPrefReader();
             String fileLoc = lpr.getPreference("DataBaseFolder");
             if (fileLoc == null) {
