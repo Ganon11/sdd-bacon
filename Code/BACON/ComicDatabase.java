@@ -147,15 +147,16 @@ import java.util.Scanner;
             // The date is saved in format:
             // dow mon dd hh:mm:ss zzz yyyy
             // For more information, see the Date class.
-            dataFile.write(currentDate.toString() + "\n");
+            dataFile.write(currentDate.toString());
             for (ComicSite comic : allComics) {
                 ComicStrip strip = comic.getStrip();
                 System.out.println(comic);
-                dataFile.write("Comic Name: " + comic.getTitle() + "\n");
+                dataFile.write("\nComic Name: " + comic.getTitle() + "\n");
                 dataFile.write("Comic Author: " + comic.getAuthor() + "\n");
                 String pathline = "Image Path: " + strip.getFilePath();
                 dataFile.write(pathline + "\n");
-                dataFile.write("Comic Index: " + comic.getIndex() + "\n");
+                dataFile.write("Comic URL: " + comic.getUrl() + "\n");
+                dataFile.write("Comic Index: " + comic.getIndex());
             }
             dataFile.close();
         } catch (IOException e) {
