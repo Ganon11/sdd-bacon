@@ -57,12 +57,12 @@ public class ComicDatabaseTest {
         db.loadDatabase();
         List<BACON.ComicSite> resultList = db.getAllComics();
         BACON.ComicSite testComic = resultList.get(0);
-        String testPath = "~/sdd-bacon/PanelExamples/infinitecanvaspanels.png";
-        assertEquals("Girly", testComic.getTitle());
-        assertEquals("Mr. Pizzuto-san", testComic.getAuthor());
+        String testPath = "~/sdd-bacon/PanelExamples/4x2panels.gif";
+        assertEquals("DOMINIC DEEGAN", testComic.getTitle());
+        assertEquals("M IS FOR MOOKIE", testComic.getAuthor());
         assertEquals(testPath, testComic.getStrip().getFilePath());
-        assertEquals("http://www.prettygirly.com/", testComic.getUrl());
-        assertEquals(2, testComic.getIndex());
+        assertEquals("http://www.dominic-deegan.com/", testComic.getUrl());
+        assertEquals(3, testComic.getIndex());
     }
 
     /**
@@ -122,11 +122,11 @@ public class ComicDatabaseTest {
         ComicSite sc = new ComicSite("CAD", "Tim Buckley", "http://www.cad-comic.com", 1);
         db.addComic(cs);
         db.addComic(sc);
-        assertEquals(sc, db.getNextComic());
-        assertEquals(sc, db.getPreviousComic());
-        assertEquals(sc, db.getNextComic());
         assertEquals(cs, db.getNextComic());
         assertEquals(sc, db.getNextComic());
+        assertEquals(cs, db.getNextComic());
+        assertEquals(sc, db.getPreviousComic());
+        assertEquals(cs, db.getPreviousComic());
     }
 
 }

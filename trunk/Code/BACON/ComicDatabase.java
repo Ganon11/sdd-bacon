@@ -80,7 +80,7 @@ import java.util.Scanner;
         allComics.clear();
         current = 0;
         try {
-            System.out.println(DATA_FILE);
+            //System.out.println(DATA_FILE);
             Scanner dataFile = new Scanner(new FileReader(DATA_FILE));
             String dateSaved = dataFile.nextLine();
             // The date is saved in format:
@@ -115,10 +115,10 @@ import java.util.Scanner;
         } catch (FileNotFoundException e) {
             throw e;
         }
-        System.out.println(allComics.size());
+        //System.out.println(allComics.size());
         sortComicList();
-        for (ComicSite cs : allComics)
-            System.out.println(cs);
+        //for (ComicSite cs : allComics)
+        //    System.out.println(cs);
     }
 
     /**
