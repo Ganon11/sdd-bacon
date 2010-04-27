@@ -80,6 +80,7 @@ import java.util.Scanner;
         allComics.clear();
         current = 0;
         try {
+            System.out.println(DATA_FILE);
             Scanner dataFile = new Scanner(new FileReader(DATA_FILE));
             String dateSaved = dataFile.nextLine();
             // The date is saved in format:
@@ -114,7 +115,10 @@ import java.util.Scanner;
         } catch (FileNotFoundException e) {
             throw e;
         }
+        System.out.println(allComics.size());
         sortComicList();
+        for (ComicSite cs : allComics)
+            System.out.println(cs);
     }
 
     /**
@@ -146,6 +150,7 @@ import java.util.Scanner;
             dataFile.write(currentDate.toString() + "\n");
             for (ComicSite comic : allComics) {
                 ComicStrip strip = comic.getStrip();
+                System.out.println(comic);
                 dataFile.write("Comic Name: " + comic.getTitle() + "\n");
                 dataFile.write("Comic Author: " + comic.getAuthor() + "\n");
                 String pathline = "Image Path: " + strip.getFilePath();
@@ -210,7 +215,7 @@ import java.util.Scanner;
         if (current >= allComics.size() || --current < 0) current = allComics.size() - 1;
         return allComics.get(current);
     }
-    
+
     /**
     * Returns the current comic as a ComicSite.
     *
@@ -227,7 +232,7 @@ import java.util.Scanner;
      */
     public void addComic(ComicSite cs) {
         int pos = Collections.binarySearch(allComics, cs);
-        
+
         if (pos < 0) {
             //pos == (-(insertion point) - 1)
             current = -(pos + 1);
@@ -236,7 +241,7 @@ import java.util.Scanner;
             //The comic has already been found in the database...
         }
     }
-    
+
     /**
     * Removes a ComicSite from the list
     */

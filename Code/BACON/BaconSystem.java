@@ -32,6 +32,7 @@ import BACON.MainFrame;
 import BACON.SwingInput;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -55,6 +56,7 @@ public class BaconSystem {
     public static void main(String[] args) {
         boolean notFirstRun = new File(".localpref.dat").exists();
         ComicDatabase db;
+        LocalPrefReader lpr;
         if (!notFirstRun) {
             // prompt for location to save comic database and images
             boolean location = false;
@@ -76,12 +78,12 @@ public class BaconSystem {
                     location = true;
                 }
             }
-            LocalPrefReader lpr = new LocalPrefReader();
+            lpr = new LocalPrefReader();
             lpr.setPreference("DataBaseFolder", locDb);
             lpr.setPreference("SortStyle", "A_TO_Z_ALPHABETICAL");
             db = new ComicDatabase(locDb + File.separator + ".datafile.dat");
         } else {
-            LocalPrefReader lpr = new LocalPrefReader();
+            lpr = new LocalPrefReader();
             String fileLoc = lpr.getPreference("DataBaseFolder");
             if (fileLoc == null) {
                 // We has a problem. Better get that file again.
@@ -99,8 +101,15 @@ public class BaconSystem {
                 lpr.setPreference("DataBaseFolder", locDb);
             }
             db = new ComicDatabase(fileLoc + File.separator + ".datafile.dat");
+            try {
+                db.loadDatabase();
+            } catch (FileNotFoundException e) {
+                SwingInput.displayErrorMessage(fileLoc + File.separator +
+                                               ".datafile.dat could not be found: "
+                                               + e.getMessage());
+            }
         }
-        new MainFrame(db).setVisible(true);
+        new MainFrame(db, lpr).setVisible(true);
     }
 
     /**
