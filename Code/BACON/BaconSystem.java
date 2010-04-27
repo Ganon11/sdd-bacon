@@ -48,6 +48,12 @@ import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
 
 public class BaconSystem {
+    public static final String ABOUT_TEXT =
+        "This program is licensed under the GNU General Public License v3\n" +
+        "and is \u00A9 2010 The Circuit Breakers. The terms of the license may be\n" +
+        "found at <http://www.gnu.org/licenses>. You may also view the text\n" +
+        "locally by using your favorite ZIP/RAR editor to explore this JAR file\n" +
+        "and read license.txt.";
 
     /**
      * main - Entry point for the application
@@ -109,7 +115,8 @@ public class BaconSystem {
                                                + e.getMessage());
             }
         }
-        new MainFrame(db, lpr).setVisible(true);
+        //new MainFrame(db, lpr).setVisible(true);
+        new MainFrame(db).setVisible(true);
     }
 
     /**

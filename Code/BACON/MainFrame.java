@@ -29,6 +29,7 @@ package BACON;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.io.IOException;
 import javax.swing.*;
 
@@ -50,8 +51,10 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollBar1 = new javax.swing.JScrollBar();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        comicMenu = new javax.swing.JPopupMenu();
+        editComicMenuItem = new javax.swing.JMenuItem();
+        removeComicMenuItem = new javax.swing.JMenuItem();
+        launchSiteMenuItem = new javax.swing.JMenuItem();
         mainComicPanel = new javax.swing.JPanel();
         prevButton = new javax.swing.JButton();
         nextButton = new javax.swing.JButton();
@@ -64,11 +67,32 @@ public class MainFrame extends javax.swing.JFrame {
         sortMenu = new javax.swing.JMenu();
         sortByNameMenuItem = new javax.swing.JMenuItem();
         sortByUpdateMenuItem = new javax.swing.JMenuItem();
-        webcomicMenu = new javax.swing.JMenu();
-        addWebcomicMenuItem = new javax.swing.JMenuItem();
-        editComicMenuItem = new javax.swing.JMenuItem();
-        removeComicMenuItem = new javax.swing.JMenuItem();
+        addComicButton = new javax.swing.JMenu();
         aboutButton = new javax.swing.JMenu();
+
+        editComicMenuItem.setText("Edit Comic");
+        editComicMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editComicMenuItemActionPerformed(evt);
+            }
+        });
+        comicMenu.add(editComicMenuItem);
+
+        removeComicMenuItem.setText("Remove Comic");
+        removeComicMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeComicMenuItemActionPerformed(evt);
+            }
+        });
+        comicMenu.add(removeComicMenuItem);
+
+        launchSiteMenuItem.setText("Launch Comic Site");
+        launchSiteMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                launchSiteMenuItemActionPerformed(evt);
+            }
+        });
+        comicMenu.add(launchSiteMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BACON");
@@ -100,8 +124,11 @@ public class MainFrame extends javax.swing.JFrame {
         comicLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         comicLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         comicLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                comicLabelMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                comicLabelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                comicLabelMouseReleased(evt);
             }
         });
         comicPane.setViewportView(comicLabel);
@@ -115,7 +142,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(425, Short.MAX_VALUE))
-            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
         );
         mainComicPanelLayout.setVerticalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,43 +190,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         menuBar.add(sortMenu);
 
-        webcomicMenu.setText("Webcomic");
-
-        addWebcomicMenuItem.setText("Add Webcomic");
-        addWebcomicMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addWebcomicMenuItemActionPerformed(evt);
+        addComicButton.setText("Add Comic");
+        addComicButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addComicButtonMouseClicked(evt);
             }
         });
-        webcomicMenu.add(addWebcomicMenuItem);
-
-        editComicMenuItem.setText("Edit Current Webcomic");
-        editComicMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editComicMenuItemActionPerformed(evt);
-            }
-        });
-        webcomicMenu.add(editComicMenuItem);
-
-        removeComicMenuItem.setText("Remove Webcomic");
-        removeComicMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeComicMenuItemActionPerformed(evt);
-            }
-        });
-        webcomicMenu.add(removeComicMenuItem);
-
-        menuBar.add(webcomicMenu);
+        menuBar.add(addComicButton);
 
         aboutButton.setText("About");
         aboutButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 aboutButtonMouseClicked(evt);
-            }
-        });
-        aboutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutButtonActionPerformed(evt);
             }
         });
         menuBar.add(aboutButton);
@@ -235,19 +237,6 @@ public class MainFrame extends javax.swing.JFrame {
         database.sortComicList();
     }//GEN-LAST:event_sortByUpdateMenuItemActionPerformed
 
-    private void addWebcomicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWebcomicMenuItemActionPerformed
-        ComicSite cs = ComicDialog.show(this, null);
-        if(cs == null) {
-            //Dialog cancelled, do nothing
-            //SwingInput.displayErrorMessage("Comic not created/added.");
-            return;
-        }
-        //cs.getStrip().loadImage();
-        
-        database.addComic(cs);
-        displayCurrentComic();
-    }//GEN-LAST:event_addWebcomicMenuItemActionPerformed
-
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
         ComicSite cs = ComicDialog.show(this, database.getCurrentComic());
         if(cs == null) {
@@ -255,20 +244,25 @@ public class MainFrame extends javax.swing.JFrame {
             //SwingInput.displayErrorMessage("Comic not edited.");
             return;
         }
-        //cs.getStrip().loadImage();
         database.removeComic();
         database.addComic(cs);
         displayCurrentComic();
     }//GEN-LAST:event_editComicMenuItemActionPerformed
 
     private void removeComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeComicMenuItemActionPerformed
-        database.removeComic();
-        displayCurrentComic();
+        ComicSite cs = database.getCurrentComic();
+        if(cs != null && confirm("Remove " + cs.getTitle() + " from the comic database?",
+                "Remove Comic")) {
+            database.removeComic();
+            displayCurrentComic();
+        }
     }//GEN-LAST:event_removeComicMenuItemActionPerformed
 
     private void aboutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutButtonMouseClicked
         // Displays a window with the license text and a link to the Google code site.
         new AboutFrame().setVisible(true);
+        JOptionPane.showMessageDialog(this, BaconSystem.ABOUT_TEXT, "About",
+            JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_aboutButtonMouseClicked
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
@@ -291,18 +285,52 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formKeyPressed
 
-    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        new AboutFrame().setVisible(true);
-    }//GEN-LAST:event_aboutButtonActionPerformed
-
-    private void comicLabelMouseClicked(java.awt.event.MouseEvent evt) {
-        ComicSite cs = database.getCurrentComic();
-        try {
-            BrowserLaunch.loadBrowser(cs.getUrl());
-        } catch (IOException e) {
-            SwingInput.displayErrorMessage("Could not load website: " + e.getMessage());
+    private void comicLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comicLabelMousePressed
+        if(database.hasComics() && evt.isPopupTrigger()) {
+            comicMenu.show(evt.getComponent(), evt.getX(), evt.getY());
         }
+    }//GEN-LAST:event_comicLabelMousePressed
+
+    private void comicLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comicLabelMouseReleased
+        if(database.hasComics() && evt.isPopupTrigger()) {
+            comicMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_comicLabelMouseReleased
+
+    private void launchSiteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchSiteMenuItemActionPerformed
+        ComicSite cs = database.getCurrentComic();
+        if(cs != null) {
+            try {
+                BrowserLaunch.loadBrowser(cs.getUrl());
+            } catch (IOException e) {
+                SwingInput.displayErrorMessage("Could not load website: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_launchSiteMenuItemActionPerformed
+
+    private void addComicButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addComicButtonMouseClicked
+        ComicSite cs = ComicDialog.show(this, null);
+        if(cs == null) {
+            //Dialog cancelled, do nothing
+            //SwingInput.displayErrorMessage("Comic not created/added.");
+            return;
+        }
+        database.addComic(cs);
+        displayCurrentComic();
+}//GEN-LAST:event_addComicButtonMouseClicked
+
+    /**
+     * Displays a Yes/No confirmation dialog to the user and returns true if they hit Yes.
+     *
+     * @param msg   the Object to display
+     * @param title the title string for the dialog
+     * @return      true if the user hits Yes
+     */
+    public boolean confirm(Object msg, String title) {
+        return JOptionPane.showConfirmDialog(this, msg, title, JOptionPane.YES_NO_OPTION,
+            JOptionPane.PLAIN_MESSAGE) == JOptionPane.YES_OPTION;
     }
+
     /**
      * Displays the current comic in the database.
      */
@@ -343,14 +371,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu aboutButton;
-    private javax.swing.JMenuItem addWebcomicMenuItem;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JMenu addComicButton;
     private javax.swing.JLabel comicLabel;
+    private javax.swing.JPopupMenu comicMenu;
     private javax.swing.JScrollPane comicPane;
     private javax.swing.JMenuItem editComicMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JMenuItem launchSiteMenuItem;
     private javax.swing.JPanel mainComicPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton nextButton;
@@ -360,7 +388,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem sortByNameMenuItem;
     private javax.swing.JMenuItem sortByUpdateMenuItem;
     private javax.swing.JMenu sortMenu;
-    private javax.swing.JMenu webcomicMenu;
     // End of variables declaration//GEN-END:variables
     private ComicDatabase database;
 

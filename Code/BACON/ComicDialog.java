@@ -39,7 +39,7 @@ public class ComicDialog extends javax.swing.JDialog {
             this.setTitle("Edit " + cs.getTitle());
         } else this.setTitle("New Comic");
 
-        this.getRootPane().setDefaultButton(btnLoadImages);
+        this.getRootPane().setDefaultButton(btnAccept);
     }
 
     /** This method is called from within the constructor to
@@ -240,14 +240,12 @@ public class ComicDialog extends javax.swing.JDialog {
                 comicSite.setStrip(new ComicStrip(imageUrls[cIndex]));
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Please enter the name of the comic.",
-                    "Enter Comic Name", JOptionPane.PLAIN_MESSAGE);
+                showMessage("Please enter the name of the comic.", "Enter Comic Name");
             }
         } else {
             //Tell user that they must enter and load a valid URL
-            JOptionPane.showMessageDialog(this,
-                "Please enter a valid website URL and load the images from it.",
-                "Enter Website URL", JOptionPane.PLAIN_MESSAGE);
+            showMessage("Please enter a valid website URL and load the images from it.",
+                "Enter Website URL");
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
 
@@ -312,12 +310,10 @@ public class ComicDialog extends javax.swing.JDialog {
         if(!hasImages()) { //Site issue
             if(imageUrls == null) {
                 //Error - Couldn't load page
-                JOptionPane.showMessageDialog(this, "The webpage entered is not valid.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                showError("The webpage entered is not valid.", "Invalid Webpage");
             } else {
                 //Error - No images
-                JOptionPane.showMessageDialog(this,
-                        "No images were found on the webpage entered.", "No Images Found", JOptionPane.ERROR_MESSAGE);
+                showError("No images were found on the webpage entered.", "No Images Found");
             }
             imageUrls = null;
             txtUrl.setEnabled(true);
@@ -359,6 +355,26 @@ public class ComicDialog extends javax.swing.JDialog {
         ComicDialog dialog = new ComicDialog(parent, true, cs);
         dialog.setVisible(true);
         return dialog.getComicSite();
+    }
+
+    /**
+     * Displays an error message dialog to the user with the given message and title.
+     *
+     * @param msg   the Object to display
+     * @param title the title string for the dialog
+     */
+    private void showError(Object msg, String title) {
+        JOptionPane.showMessageDialog(this, msg, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Displays a message dialog to the user with the given message and title.
+     *
+     * @param msg   the Object to display
+     * @param title the title string for the dialog
+     */
+    private void showMessage(Object msg, String title) {
+        JOptionPane.showMessageDialog(this, msg, title, JOptionPane.PLAIN_MESSAGE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
