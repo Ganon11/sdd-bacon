@@ -143,6 +143,7 @@ public class MainFrame extends javax.swing.JFrame {
         comicPane.setViewportView(comicLabel);
 
         addComicButton.setText("Add Comic");
+        addComicButton.setFocusable(false);
         addComicButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addComicButtonActionPerformed(evt);
@@ -150,6 +151,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         aboutButton.setText("About");
+        aboutButton.setFocusable(false);
         aboutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutButtonActionPerformed(evt);
@@ -164,12 +166,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(prevButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addComicButton)
-                .addGap(98, 98, 98)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(aboutButton)
-                .addContainerGap(185, Short.MAX_VALUE))
-            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                .addContainerGap(289, Short.MAX_VALUE))
+            .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
         );
         mainComicPanelLayout.setVerticalGroup(
             mainComicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,11 +276,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         displayNextComic(true);
-}//GEN-LAST:event_nextButtonActionPerformed
+    }//GEN-LAST:event_nextButtonActionPerformed
 
     private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
         displayNextComic(false);
-}//GEN-LAST:event_prevButtonActionPerformed
+    }//GEN-LAST:event_prevButtonActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         //System.out.format("KEY PRESSED: %d\n", evt.getKeyCode());
@@ -329,7 +331,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
         // Displays a window with the license text and a link to the Google code site.
         JOptionPane.showMessageDialog(this, BaconSystem.ABOUT_TEXT, "About",
-            JOptionPane.PLAIN_MESSAGE);        // TODO add your handling code here:
+            JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     /**
@@ -342,23 +344,6 @@ public class MainFrame extends javax.swing.JFrame {
     public boolean confirm(Object msg, String title) {
         return JOptionPane.showConfirmDialog(this, msg, title, JOptionPane.YES_NO_OPTION,
             JOptionPane.PLAIN_MESSAGE) == JOptionPane.YES_OPTION;
-    }
-
-    /**
-     * Displays the current comic in the database.
-     */
-    public void displayCurrentComic() {
-        displayComic(database.getCurrentComic());
-    }
-
-    /**
-     * Displays the next or previous comic from the database.
-     *
-     * @param next If true, the next image is displayed. If false, the previous is.
-     */
-    public void displayNextComic(boolean next) {
-        if (next) displayComic(database.getNextComic());
-        else displayComic(database.getPreviousComic());
     }
 
     /**
@@ -380,6 +365,43 @@ public class MainFrame extends javax.swing.JFrame {
             comicLabel.setText("");
             comicLabel.setIcon(null);
         }
+    }
+    
+    /**
+     * Displays the current comic in the database.
+     */
+    public void displayCurrentComic() {
+        displayComic(database.getCurrentComic());
+    }
+
+    /**
+     * Displays the next or previous comic from the database.
+     *
+     * @param next If true, the next image is displayed. If false, the previous is.
+     */
+    public void displayNextComic(boolean next) {
+        if (next) displayComic(database.getNextComic());
+        else displayComic(database.getPreviousComic());
+    }
+
+    /**
+     * Displays an error message dialog to the user with the given message and title.
+     *
+     * @param msg   the Object to display
+     * @param title the title string for the dialog
+     */
+    private void showError(Object msg, String title) {
+        JOptionPane.showMessageDialog(this, msg, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Displays a message dialog to the user with the given message and title.
+     *
+     * @param msg   the Object to display
+     * @param title the title string for the dialog
+     */
+    private void showMessage(Object msg, String title) {
+        JOptionPane.showMessageDialog(this, msg, title, JOptionPane.PLAIN_MESSAGE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
