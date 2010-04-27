@@ -60,7 +60,9 @@ public class ComicDatabaseTest {
         String testPath = "~/sdd-bacon/PanelExamples/4x2panels.gif";
         assertEquals("DOMINIC DEEGAN", testComic.getTitle());
         assertEquals("M IS FOR MOOKIE", testComic.getAuthor());
-        assertEquals(testPath, testComic.getStrip().getFilePath());
+        // Next line commented out because new ComicDatabase functionality may
+        // latest image on its own - in which case the filepath will change
+        //assertEquals(testPath, testComic.getStrip().getFilePath());
         assertEquals("http://www.dominic-deegan.com/", testComic.getUrl());
         assertEquals(3, testComic.getIndex());
     }

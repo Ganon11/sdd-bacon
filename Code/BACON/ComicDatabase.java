@@ -107,8 +107,9 @@ import java.util.Scanner;
                 String filePath = fileLine.substring(12);
                 String url = urlLine.substring(11);
                 int index = Integer.parseInt(indexLine.substring(13));
-                strip = new ComicStrip(filePath);
+                strip = new ComicStrip(BaconSystem.getImageN(url, index));
                 comic = new ComicSite(title, author, url, index);
+                strip.loadImage();
                 comic.setStrip(strip);
                 allComics.add(comic);
             }
