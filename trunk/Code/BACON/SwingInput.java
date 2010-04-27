@@ -27,6 +27,7 @@
 
 package BACON;
 
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -64,7 +65,7 @@ public class SwingInput {
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int retval = fc.showOpenDialog(null);
         if (retval == JFileChooser.APPROVE_OPTION) {
-            return fc.getSelectedFile().getName();
+            return fc.getCurrentDirectory() + File.separator + fc.getSelectedFile().getName();
         } else {
             return "";
         }
