@@ -226,6 +226,16 @@ import java.util.Scanner;
         if (current < 0 || current >= allComics.size()) current = 0;
         return allComics.get(current);
     }
+    
+    /**
+    * Returns true if the database has any comics stored.
+    *
+    * @return true if the comic list is NOT empty.
+    */
+    public boolean hasComics() {
+        return !allComics.isEmpty();
+    }
+    
     /**
      * Adds a ComicSite to the list.
      * @param cs The ComicSite to be added

@@ -2,10 +2,38 @@
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JScrollBar" name="jScrollBar1">
-    </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
-    </Component>
+    <Container class="javax.swing.JPopupMenu" name="comicMenu">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="editComicMenuItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit Comic"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editComicMenuItemActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="removeComicMenuItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Remove Comic"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeComicMenuItemActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="launchSiteMenuItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Launch Comic Site"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="launchSiteMenuItemActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
     <Menu class="javax.swing.JMenuBar" name="menuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileMenu">
@@ -54,36 +82,13 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="webcomicMenu">
+        <Menu class="javax.swing.JMenu" name="addComicButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Webcomic"/>
+            <Property name="text" type="java.lang.String" value="Add Comic"/>
           </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="addWebcomicMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Add Webcomic"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addWebcomicMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="editComicMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Edit Current Webcomic"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editComicMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="removeComicMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Remove Webcomic"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeComicMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addComicButtonMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="aboutButton">
           <Properties>
@@ -91,7 +96,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="aboutButtonMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutButtonActionPerformed"/>
           </Events>
         </Menu>
       </SubComponents>
@@ -145,7 +149,7 @@
                   <Component id="nextButton" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace pref="425" max="32767" attributes="0"/>
               </Group>
-              <Component id="comicPane" alignment="0" pref="567" max="32767" attributes="0"/>
+              <Component id="comicPane" alignment="0" pref="574" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -192,7 +196,8 @@
                 <Property name="verticalTextPosition" type="int" value="1"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="comicLabelMouseClicked"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="comicLabelMousePressed"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="comicLabelMouseReleased"/>
               </Events>
             </Component>
           </SubComponents>

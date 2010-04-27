@@ -33,11 +33,11 @@ public class AboutFrame extends javax.swing.JFrame {
     /** Creates new form LicenseFrame */
     public AboutFrame() {
         initComponents();
-        jTextArea1.setText("This program is licensed under the GNU General Public License v3\n" +
+        jTextArea1.setText(BaconSystem.ABOUT_TEXT);/*"This program is licensed under the GNU General Public License v3\n" +
                 " and is (c) 2010 The Circuit Breakers. The terms of the " +
                 "license may\n be found at <http://www.gnu.org/licenses>. You may also\n " +
                 "view the text locally by using your favorite ZIP/RAR editor to\n " +
-                "explore this JAR file and read license.txt.");
+                "explore this JAR file and read license.txt.");*/
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
     
