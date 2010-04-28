@@ -49,6 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
                 database.saveDatabase();
             }
         });
+		if(db != null) displayCurrentComic();
     }
 
     /** This method is called from within the constructor to
