@@ -40,6 +40,6 @@
     </target>
 
     <target name="zip">
-        <zip destfile="bacon_src.zip" basedir="BACON"/>
+        <zip destfile="bacon_src.zip" basedir="BACON" includes="*.java"/>
     </target>
 </project>
