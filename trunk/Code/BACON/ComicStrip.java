@@ -80,18 +80,18 @@ public class ComicStrip {
     * @return Returns true if successfully added, false if not.
     */
     public boolean saveImage(String dest) {
-    	if(!(isUrl)) {
-    		return false;
-    	}
-    	else {
-    		try { 
-    		filePath = ImageGrabber.getImage(new URL(filePath), dest);
-    		} catch (java.net.MalformedURLException e) {
-    			System.err.println("URL not properly formatted:" + filePath);
-    		}
-    		if(filePath != null) return true;
-    		else return false;
-    	}
+        if(!(isUrl)) {
+            return false;
+        }
+        else {
+            try { 
+            filePath = ImageGrabber.getImage(new URL(filePath), dest);
+            } catch (java.net.MalformedURLException e) {
+                System.err.println("URL not properly formatted:" + filePath);
+            }
+            if(filePath != null) return true;
+            else return false;
+        }
     }
 
     /**
@@ -121,7 +121,7 @@ public class ComicStrip {
      */
     public void loadImage() {
         //System.out.format("LOADING %s\n", filePath);
-        if (!isUrl) {
+        /*if (!isUrl) {
             comicStripImage = new ImageIcon(filePath);
         } else {
             try {
@@ -131,7 +131,7 @@ public class ComicStrip {
                 System.err.format("ComicStrip path %s is not a valid URL\n", filePath);
                 comicStripImage = new ImageIcon(filePath);
             }
-        }
+        }*/
      }
 
     /**
@@ -141,7 +141,17 @@ public class ComicStrip {
      * @see     Image
      */
     public Icon getComicStripImage() {
-        return comicStripImage;
+        //return comicStripImage;
+        if (isUrl) {
+            try {
+                return new ImageIcon(new URL(filePath));
+            } catch(java.net.MalformedURLException e) {
+                //URL isn't valid...
+                System.err.format("ComicStrip path %s is not a valid URL\n", filePath);
+                
+            }
+        }
+        return new ImageIcon(filePath);
     }
 
     /**
