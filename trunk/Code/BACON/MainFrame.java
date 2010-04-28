@@ -310,7 +310,7 @@ public class MainFrame extends javax.swing.JFrame {
         ComicSite cs = database.getCurrentComic();
         if(cs != null) {
             try {
-                BrowserLaunch.loadBrowser(cs.getUrl());
+                BrowserLaunch.openUrl(cs.getUrl());
             } catch (IOException e) {
                 SwingInput.displayErrorMessage("Could not load website: " + e.getMessage());
             }
@@ -366,7 +366,7 @@ public class MainFrame extends javax.swing.JFrame {
             comicLabel.setIcon(null);
         }
     }
-    
+
     /**
      * Displays the current comic in the database.
      */
