@@ -72,6 +72,27 @@ public class ComicStrip {
         comicStripImage = null;
         isUrl = true;
     }
+    
+    /**
+    * Saves the image to the directory given to the method.
+    *
+    * @param dest The path to the directory where images for that particular comic are stored.
+    * @return Returns true if successfully added, false if not.
+    */
+    public boolean saveImage(String dest) {
+    	if(!(isUrl)) {
+    		return false;
+    	}
+    	else {
+    		try { 
+    		filePath = ImageGrabber.getImage(new URL(filePath), dest);
+    		} catch (java.net.MalformedURLException e) {
+    			System.err.println("URL not properly formatted:" + filePath);
+    		}
+    		if(filePath != null) return true;
+    		else return false;
+    	}
+    }
 
     /**
      * Loads the image specified by fileName into comicStripImage.
