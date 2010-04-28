@@ -156,10 +156,13 @@ public class BaconSystem {
 
         URL[] urls = new URL[imgs.size()];
         for(int i = 0; i < urls.length; ++i) {
-            try {
-                urls[i] = new URL(base, imgs.get(i).getAttribute(HTML.Attribute.SRC).toString());
-            } catch(java.net.MalformedURLException e) {
-                //Bad image URL, keep a null placeholder
+            Object src = imgs.get(i).getAttribute(HTML.Attribute.SRC);
+            if(src != null) {
+                try {
+                    urls[i] = new URL(base, src.toString());
+                } catch(java.net.MalformedURLException e) {
+                    //Bad image URL, keep a null placeholder
+                }
             }
         }
 
