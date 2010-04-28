@@ -26,6 +26,7 @@
  */
 
 package BACON;
+import java.io.File;
 
 public class ComicSite implements Comparable<ComicSite> {
     private ComicStrip currentStrip;    // The current Comic Image.
@@ -140,6 +141,24 @@ public class ComicSite implements Comparable<ComicSite> {
     public String toString() {
         return getInfoString();
     }
+    
+    public boolean saveStrip(String dir) {
+    	File directory = new File(dir);
+    	if(directory.exists() && !(directory.isDirectory())) {
+    		System.err.println("Was not passed a proper directory!");
+    		return false;
+    	}
+    	else {
+    		if(!(directory.mkdirs())){ 
+    			System.err.println("Could not create directory " + directory);
+    			return false;
+    		}
+    		
+    		return currentStrip.saveImage(dir);
+    	}
+    }
+    	
+    	
 
     /**
      * Comparator. Uses whatever type is held in sortType to sort.
