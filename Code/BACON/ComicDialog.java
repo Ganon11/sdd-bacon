@@ -350,7 +350,14 @@ public class ComicDialog extends javax.swing.JDialog {
             }
         } else clearImages();
     }
-
+    
+    /**
+     * Displays a new ComicDialog to the user and returns the resulting comic created.
+     *
+     * @param parent    the parent window launching the dialog
+     * @param cs        A previous ComicSite to edit, or null to create a blank form
+     * @return          the resulting ComicSite created by the user, or null if they cancelled the dialog
+     */
     public static ComicSite show(java.awt.Frame parent, ComicSite cs) {
         ComicDialog dialog = new ComicDialog(parent, true, cs);
         dialog.setVisible(true);
