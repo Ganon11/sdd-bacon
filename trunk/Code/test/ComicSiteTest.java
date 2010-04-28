@@ -89,7 +89,7 @@ public class ComicSiteTest {
     public void Test_compareToAlpha() {
         ComicSite.sortMethod = SortMethod.SORT_BY_ALPHABETICAL;
         ComicSite cs = new ComicSite("xkcd", "Randall Munroe", "http://www.xkcd.com", 1);
-        ComicSite o = new ComicSite("xkcd", "Sandall Munroe", "http://www.xkcd.com", 1);
+        ComicSite o = new ComicSite("ykcd", "Randall Munroe", "http://www.xkcd.com", 1);
         assertThat(cs.compareTo(o), is(equalTo(-1)));
     }
 }
