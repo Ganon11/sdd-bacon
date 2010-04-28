@@ -38,4 +38,8 @@
             <test name="test.LocalPrefReaderTest"/>
         </junit>
     </target>
+
+    <target name="zip">
+        <zip destfile="bacon_src.zip" basedir="BACON"/>
+    </target>
 </project>
