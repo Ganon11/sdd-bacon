@@ -64,6 +64,14 @@
             <Property name="text" type="java.lang.String" value="Sort"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="sortByAuthorMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sort by Author"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortByAuthorMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="sortByNameMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sort by Name"/>
@@ -135,7 +143,7 @@
                   <Component id="addComicButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="aboutButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="289" max="32767" attributes="0"/>
+                  <EmptySpace pref="309" max="32767" attributes="0"/>
               </Group>
               <Component id="comicPane" alignment="0" pref="594" max="32767" attributes="0"/>
           </Group>

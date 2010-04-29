@@ -106,6 +106,7 @@ import java.util.Scanner;
                 String author = authorLine.substring(14);
                 String filePath = fileLine.substring(12);
                 String url = urlLine.substring(11);
+                //System.out.println(url);
                 int index = Integer.parseInt(indexLine.substring(13));
                 strip = new ComicStrip(BaconSystem.getImageN(url, index));
                 comic = new ComicSite(title, author, url, index);
@@ -228,7 +229,7 @@ import java.util.Scanner;
         if (current < 0 || current >= allComics.size()) current = 0;
         return allComics.get(current);
     }
-    
+
     /**
     * Returns true if the database has any comics stored.
     *
@@ -237,7 +238,7 @@ import java.util.Scanner;
     public boolean hasComics() {
         return !allComics.isEmpty();
     }
-    
+
     /**
      * Adds a ComicSite to the list.
      * @param cs The ComicSite to be added

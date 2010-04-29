@@ -49,7 +49,7 @@ public class MainFrame extends javax.swing.JFrame {
                 database.saveDatabase();
             }
         });
-		if(db != null) displayCurrentComic();
+        if(db != null) displayCurrentComic();
     }
 
     /** This method is called from within the constructor to
@@ -77,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
         preferencesMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         sortMenu = new javax.swing.JMenu();
+        sortByAuthorMenuItem = new javax.swing.JMenuItem();
         sortByNameMenuItem = new javax.swing.JMenuItem();
         sortByUpdateMenuItem = new javax.swing.JMenuItem();
 
@@ -171,7 +172,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(addComicButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(aboutButton)
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
             .addComponent(comicPane, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
         );
         mainComicPanelLayout.setVerticalGroup(
@@ -203,6 +204,14 @@ public class MainFrame extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         sortMenu.setText("Sort");
+
+        sortByAuthorMenuItem.setText("Sort by Author");
+        sortByAuthorMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortByAuthorMenuItemActionPerformed(evt);
+            }
+        });
+        sortMenu.add(sortByAuthorMenuItem);
 
         sortByNameMenuItem.setText("Sort by Name");
         sortByNameMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -247,11 +256,13 @@ public class MainFrame extends javax.swing.JFrame {
     private void sortByNameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByNameMenuItemActionPerformed
         ComicSite.sortMethod = SortMethod.SORT_BY_ALPHABETICAL;
         database.sortComicList();
+        lpr.setPreference("SortStyle", "A_TO_Z_ALPHABETICAL");
     }//GEN-LAST:event_sortByNameMenuItemActionPerformed
 
     private void sortByUpdateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByUpdateMenuItemActionPerformed
         ComicSite.sortMethod = SortMethod.SORT_BY_DATE;
         database.sortComicList();
+        lpr.setPreference("SortStyle", "DATE_LAST_UPDATED");
     }//GEN-LAST:event_sortByUpdateMenuItemActionPerformed
 
     private void editComicMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComicMenuItemActionPerformed
@@ -334,6 +345,12 @@ public class MainFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, BaconSystem.ABOUT_TEXT, "About",
             JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_aboutButtonActionPerformed
+
+    private void sortByAuthorMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByAuthorMenuItemActionPerformed
+        ComicSite.sortMethod = SortMethod.SORT_BY_AUTHOR;
+        database.sortComicList();
+        lpr.setPreference("SortStyle", "AUTHOR_NAME_A_TO_Z");
+    }//GEN-LAST:event_sortByAuthorMenuItemActionPerformed
 
     /**
      * Displays a Yes/No confirmation dialog to the user and returns true if they hit Yes.
@@ -421,6 +438,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem preferencesMenuItem;
     private javax.swing.JButton prevButton;
     private javax.swing.JMenuItem removeComicMenuItem;
+    private javax.swing.JMenuItem sortByAuthorMenuItem;
     private javax.swing.JMenuItem sortByNameMenuItem;
     private javax.swing.JMenuItem sortByUpdateMenuItem;
     private javax.swing.JMenu sortMenu;

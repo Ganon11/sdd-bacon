@@ -29,5 +29,6 @@ package BACON;
 
  public enum SortMethod {
      SORT_BY_ALPHABETICAL,
+     SORT_BY_AUTHOR,
      SORT_BY_DATE
  }
