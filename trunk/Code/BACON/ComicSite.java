@@ -132,7 +132,7 @@ public class ComicSite implements Comparable<ComicSite> {
         retval += " at " + comicUrl;
         return retval;
     }
-    
+
     /**
      * Returns the Information String of the ComicSite.
      *
@@ -141,24 +141,22 @@ public class ComicSite implements Comparable<ComicSite> {
     public String toString() {
         return getInfoString();
     }
-    
+
     public boolean saveStrip(String dir) {
-    	File directory = new File(dir);
-    	if(directory.exists() && !(directory.isDirectory())) {
-    		System.err.println("Was not passed a proper directory!");
-    		return false;
-    	}
-    	else {
-    		if(!(directory.mkdirs())){ 
-    			System.err.println("Could not create directory " + directory);
-    			return false;
-    		}
-    		
-    		return currentStrip.saveImage(dir);
-    	}
+        File directory = new File(dir);
+        if(directory.exists() && !(directory.isDirectory())) {
+            System.err.println("Was not passed a proper directory!");
+            return false;
+        }
+        else {
+            if(!(directory.mkdirs())){
+                System.err.println("Could not create directory " + directory);
+                return false;
+            }
+
+            return currentStrip.saveImage(dir);
+        }
     }
-    	
-    	
 
     /**
      * Comparator. Uses whatever type is held in sortType to sort.
@@ -167,6 +165,8 @@ public class ComicSite implements Comparable<ComicSite> {
     public int compareTo(ComicSite cs) {
         if (sortMethod == SortMethod.SORT_BY_ALPHABETICAL) {
             return this.comicName.compareToIgnoreCase(cs.comicName);
+        } else if (sortMethod == SortMethod.SORT_BY_AUTHOR) {
+            return this.comicAuthor.compareToIgnoreCase(cs.comicAuthor);
         } else if (sortMethod == SortMethod.SORT_BY_DATE) {
             // We don't really have enough of a date infrastructure yet to write this
             return 0;
