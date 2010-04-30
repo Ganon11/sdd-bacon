@@ -1,0 +1,25 @@
+#summary Installation Guide for new users
+
+= Introduction =
+
+This is an installation guide for first time users.
+
+= Requirements =
+
+You will need Java Runtime Environment (JRE) 1.6 or higher.
+
+= Installation =
+
+1) Download the latest version of BACON (BACON-1.0.jar)<br>
+2) (Optional) Create a folder for the Comic Database file to be stored in.  You can also choose to store the Comic Database file in any other folder.<br>
+3) Run the .jar file by double clicking on it.<br>
+4) Click *OK*.<br>
+<img src="http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/DBPrompt.png" border="0" alt="DB Prompt"><br>
+5) Navigate to the folder you want to save the Comic Database file to.  Click *Open*.<br>
+<img src="http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/DBSave.png"><br>
+6) Click *OK*.<br>
+<img src="http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/ImagePrompt.png"><br>
+7) Navigate to the folder you want to save the Comic Images in.  Click *Open*.<br>
+<img src="http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/ImageSave.png"><br>
+
+Congratulations!  BACON is now installed on your computer, and you are ready to read comics!
