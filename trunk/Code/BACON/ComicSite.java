@@ -164,9 +164,11 @@ public class ComicSite implements Comparable<ComicSite> {
      */
     public int compareTo(ComicSite cs) {
         if (sortMethod == SortMethod.SORT_BY_ALPHABETICAL) {
-            return this.comicName.compareToIgnoreCase(cs.comicName);
+            int c = this.comicName.compareToIgnoreCase(cs.comicName);
+            return c != 0 ? c : this.comicAuthor.compareToIgnoreCase(cs.comicAuthor);
         } else if (sortMethod == SortMethod.SORT_BY_AUTHOR) {
-            return this.comicAuthor.compareToIgnoreCase(cs.comicAuthor);
+            int c = this.comicAuthor.compareToIgnoreCase(cs.comicAuthor);
+            return c != 0 ? c : this.comicName.compareToIgnoreCase(cs.comicName);
         } else if (sortMethod == SortMethod.SORT_BY_DATE) {
             // We don't really have enough of a date infrastructure yet to write this
             return 0;

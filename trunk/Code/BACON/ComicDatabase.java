@@ -245,13 +245,13 @@ import java.util.Scanner;
      */
     public void addComic(ComicSite cs) {
         int pos = Collections.binarySearch(allComics, cs);
-
         if (pos < 0) {
             //pos == (-(insertion point) - 1)
             current = -(pos + 1);
             allComics.add(current, cs);
         } else {
             //The comic has already been found in the database...
+            System.err.println("Comic already exists. Will not add.");
         }
     }
 
