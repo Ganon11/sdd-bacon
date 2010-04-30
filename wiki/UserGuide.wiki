@@ -1,0 +1,7 @@
+#summary Short Guide to using BACON
+
+= Introduction =
+
+This is a short introduction to BACON, meant for first time users.  If you have used BACON for a while, you probably don't need to read this!
+
+= How To Add Comics =
