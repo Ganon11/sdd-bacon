@@ -22,4 +22,4 @@ You will need Java Runtime Environment (JRE) 1.6 or higher.
 7) Navigate to the folder you want to save the Comic Images in.  Click *Open*.<br>
 <img src="http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/ImageSave.png"><br>
 
-Congratulations!  BACON is now installed on your computer, and you are ready to read comics!
+Congratulations!  BACON is now installed on your computer, and you are ready to read comics!  You may want to visit our [UserGuide new user's guide] to learn how to use BACON.
