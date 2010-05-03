@@ -14,6 +14,10 @@ Please see our [InstallationGuide installation guide] for detailed installation 
 
 Please see our [UserGuide user's manual] for basic operating instructions.
 
+= BACON doesn't work with my favorite webcomic xyz! =
+
+BACON was created with several basic assumptions in mind.  One such assumption was that webcomic authors would post their webcomic images on some sort of main page, whose URL would not change.  This is true for the majority of the web comic sites we've visited.  However, there are some webcomic authors who post their comic images in folders named by date.  Unfortunately, BACON does not work well with these websites, and so we currently cannot find those images in our program.
+
 = This is awesome!  How can I give feedback? =
 
 Thanks!  Feel free to e-mail us at sdd.bacon@gmail.com.  I don't know if we'll be able to respond to every e-mail, but your positive feedback is greatly appreciated!
