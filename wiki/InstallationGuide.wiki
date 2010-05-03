@@ -1,4 +1,5 @@
 #summary Installation Guide for new users
+#labels Featured
 
 = Introduction =
 
