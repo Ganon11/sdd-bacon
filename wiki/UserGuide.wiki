@@ -1,4 +1,5 @@
 #summary Short Guide to using BACON
+#labels Featured
 
 = Introduction =
 
