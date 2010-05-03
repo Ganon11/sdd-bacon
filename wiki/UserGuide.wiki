@@ -12,7 +12,7 @@ If you are running BACON for the first time, you probably don't have a comic lis
 http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/BlankBACON.png<br>
 1) Click the "Add Comic" button.  The Add Comic Dialog opens.<br>
 http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/AddComicDialog.png<br>
-2) Enter the URL where the latest webcomic can be found`*`.  In this guide, we will be using the popular comic <a href="http://www.cad-comic.com">CTRL+ALT+DEL</a> by <u>Tim Buckley</u>.<br>
+2) Enter the URL where the latest webcomic can be found`*`.  In this guide, we will be using the popular comic <a href="http://www.cad-comic.com">CTRL+ALT+DEL</a> by Tim Buckley.<br>
 http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/AddComicCAD.png<br>
 3) Press the "Load Images" button, or press the Enter key, to load the images on the website.<br>
 http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/AddComicCADLoaded.png<br>
