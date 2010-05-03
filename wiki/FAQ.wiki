@@ -4,7 +4,7 @@
 
 = What is BACON? =
 
-BACON (*B*ringing *A*ll *C*omics *O*ffline *N*ow) is a Java-based application for viewing webcomics.  It allows you to catch up on all your favorite webcomics in a friendly, easy-to-use window, rather than using a full-scale browser like Google Chrome or Mozilla Firefox.
+BACON (*B* ringing *A* ll *C* omics *O* ffline *N* ow) is a Java-based application for viewing webcomics.  It allows you to catch up on all your favorite webcomics in a friendly, easy-to-use window, rather than using a full-scale browser like Google Chrome or Mozilla Firefox.
 
 = How do I install BACON? =
 
