@@ -1,5 +1,5 @@
 #summary Installation Guide for new users
-#labels Featured
+#labels Featured,Phase-Support
 
 = Introduction =
 
