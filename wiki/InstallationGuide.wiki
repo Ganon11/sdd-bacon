@@ -11,7 +11,7 @@ You will need Java Runtime Environment (JRE) 1.6 or higher.
 = Installation =
 
 1) Download the latest version of BACON (BACON-1.0.jar)<br>
-2) (Optional) Create a folder for the Comic Database file to be stored in.  You can also choose to store the Comic Database file in any other folder.<br>
+2) (Optional) Create a folder for the Comic Database file to be stored in.  You can also choose to store the Comic Database file in any other folder. The Comic Database is a file that stores information about the comics you've added and where to find them.<br>
 3) Run the .jar file by double clicking on it.<br>
 4) Click *OK*.<br>
 <img src="http://i295.photobucket.com/albums/mm132/Ganon11/BACON%20Screenshots/DBPrompt.png" border="0" alt="DB Prompt"><br>
