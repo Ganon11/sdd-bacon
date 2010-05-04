@@ -8,31 +8,31 @@ Then chances are you read one or more WEBCOMICS!  (sparkle sparkle)
 
 Now some of us (insert panel of all developers) enjoy reading many webcomics.  Lots of webcomics.  SO MANY WEBCOMICS.
 
-This results in SO MANY TABS open in Firefox/Chrome/IE/Safari/Opera (lim (tab->inf) Firefox = MUST REBOOT
+This results in SO MANY TABS open in Firefox/Chrome/IE/Safari/Opera (lim (tab->inf) Firefox = MUST REBOOT C)
 
-This makes us readers SADFACE. (SADFACE PANEL)
+This makes us readers SADFACE. (SADFACE PANEL C)
 
-Now, as we all know, laziness is a virtue! (Hurray panel! put perl reference somewhere)
+Now, as we all know, laziness is a virtue! (Hurray panel! put perl reference somewhere C)
 
-So, we present to you... BACON! (panel of actual Bacon)
+So, we present to you... BACON! (panel of actual Bacon C)
 
-No, not that bacon. BACON! Bringing All Comics Offline Now! Subtitle BACON Aggregates Comics Offline Now (Infinite recursion panel!)
+No, not that bacon. BACON! Bringing All Comics Offline Now! Subtitle BACON Aggregates Comics Offline Now (Infinite recursion panel! C)
 
 BACON displays the latest strips from your favorite webcomics! (Take this opportunity to actually scroll through some comics)
 
-You may be asking: "Gee willikers, Mr. Circuit Breakers!  How do I add MY favorite webcomic to BACON!?" (Little Timmy Panel)
+You may be asking: "Gee willikers, Mr. Circuit Breakers!  How do I add MY favorite webcomic to BACON!?" (Little Timmy Panel C)
 
 Well, Timmy, I'm glad you asked, because that provides a convenient segue into our ADD COMIC DIALOG DEMO EXTRAVAGANZA! (add comic at suggestion of audience, then edit comic to second suggestion)
 
 So how did our extremely delicious BACON come to you (chibi-Seamus yelling "I COOKED IT FOR YOU DAMMIT!")
 
-We thought about waterfall (panel of kayak going over a waterfall, or appropriately fail waterfall image), but it didn't make much sense to us.
+We thought about waterfall (panel of kayak going over a waterfall, or appropriately fail waterfall image C), but it didn't make much sense to us.
 
-We thought about SCRUM, but Dave's power level was over 9000 (image of Dave as a super sayajin)
+We thought about SCRUM, but Dave's power level was over 9000 (image of Dave as a super sayajin C)
 
 Then we tried UP, and it was juuuuuuust right!  (Happy faces, with subtext, "Plus the instructors forced us to!")
 
-Our development got off to a slow start. (panel: "What do you wanna do?"  "Iunno, what do you wanna do?"  "Iunno...frisbee?")
+Our development got off to a slow start. (panel: "What do you wanna do?"  "Iunno, what do you wanna do?"  "Iunno...frisbee?" C)
 
 But we soon got to be very productive, and started pumping out deliverables regularly.  (panel:  "Supplemental Specification!"  "Use Cases!"  "Test Plan!"  "HEART!!!")  And then we had code!  (panel: code falling on us)
 
