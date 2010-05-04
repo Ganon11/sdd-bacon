@@ -1,0 +1,55 @@
+LOL SCRIPT KTHXBAI
+
+DO YOU GO TO RPI?
+ARE YOU A GEEK?
+ARE YOU FAMILIAR WITH "TEH INTARWEBZ"?
+
+Then chances are you read one or more WEBCOMICS!  (sparkle sparkle)
+
+Now some of us (insert panel of all developers) enjoy reading many webcomics.  Lots of webcomics.  SO MANY WEBCOMICS.
+
+This results in SO MANY TABS open in Firefox/Chrome/IE/Safari/Opera (lim (tab->inf) Firefox = MUST REBOOT
+
+This makes us readers SADFACE. (SADFACE PANEL)
+
+Now, as we all know, laziness is a virtue! (Hurray panel! put perl reference somewhere)
+
+So, we present to you... BACON! (panel of actual Bacon)
+
+No, not that bacon. BACON! Bringing All Comics Offline Now! Subtitle BACON Aggregates Comics Offline Now (Infinite recursion panel!)
+
+BACON displays the latest strips from your favorite webcomics! (Take this opportunity to actually scroll through some comics)
+
+You may be asking: "Gee willikers, Mr. Circuit Breakers!  How do I add MY favorite webcomic to BACON!?" (Little Timmy Panel)
+
+Well, Timmy, I'm glad you asked, because that provides a convenient segue into our ADD COMIC DIALOG DEMO EXTRAVAGANZA! (add comic at suggestion of audience, then edit comic to second suggestion)
+
+So how did our extremely delicious BACON come to you (chibi-Seamus yelling "I COOKED IT FOR YOU DAMMIT!")
+
+We thought about waterfall (panel of kayak going over a waterfall, or appropriately fail waterfall image), but it didn't make much sense to us.
+
+We thought about SCRUM, but Dave's power level was over 9000 (image of Dave as a super sayajin)
+
+Then we tried UP, and it was juuuuuuust right!  (Happy faces, with subtext, "Plus the instructors forced us to!")
+
+Our development got off to a slow start. (panel: "What do you wanna do?"  "Iunno, what do you wanna do?"  "Iunno...frisbee?")
+
+But we soon got to be very productive, and started pumping out deliverables regularly.  (panel:  "Supplemental Specification!"  "Use Cases!"  "Test Plan!"  "HEART!!!")  And then we had code!  (panel: code falling on us)
+
+Now it's time for a boring slide.  (panel: "This is the part where you don't have to listen") Our strategy was essentially divide and conquer.  We would divide up the tasks required for each stage and work on our own or with a partner.  When finished, we would review other's deliverables for accuracy.
+
+AND NOW WE'RE BACK TO FUNNY (panel: pie flying toward our faces) YAY.
+
+There were a few problems with this strategy...
+(Dude wanna check my diagram? - Yeah, sure, sure, just let me finish checking my comics)
+
+But when push came to pull, we united for great justice.
+(Panel of us playing tug-of-war with Firefox/Chrome over a comic. THIS. IS. BACON! *picture of Gerard Butler over one of our faces*)
+
+And now, let's take a brief moment to talk about _THE FUTURE_ (panel: can we get a cheesy chrome effect?)  What will BACON be like in the future?  (panel: moldy bacon)  Eww...
+
+No, I meant our project, BACON (sound clip of crowd going "Oooohhh!!!")
+
+In _THE FUTURE_ (we promise that's the last time we'll do that), we'd like BACON to be able to flag which comics have updated since the last run, so that we can sort based on update status.  We'd also like to add some fancy features, such as automatic resizing of the window to fit comics.  Our project is hosted on Google Code (panel: Google Logo, subtitle "BLATANT GOOGLE PLUG"), so each of us will be able to continue working on this in _THE FUTURE_ (sorry i lied).
+
+And that's our project!  Thank you for reading our comic!  (panel: Thank you!)
