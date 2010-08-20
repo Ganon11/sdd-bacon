@@ -39,7 +39,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class ComicDatabaseTest {
-	private String baseDir = "C:\\Users\\starkm3\\workspace\\BACON\\src\\test\\";
+//	private String baseDir = "C:\\Users\\starkm3\\workspace\\BACON-Repo\\src\\test\\";
 
     /**
      * Tests whether an exception is thrown if the file cannot be found.
@@ -61,7 +61,8 @@ public class ComicDatabaseTest {
      */
     @Test
     public void test_LoadDatabaseReadsProperly() throws FileNotFoundException {
-        String dbFileName = baseDir + "fakedatabase.dat";
+//        String dbFileName = baseDir + "fakedatabase.dat";
+    	String dbFileName = "fakedatabase.dat";
         ComicDatabase db = new ComicDatabase(dbFileName);
         db.loadDatabase();
         List<ComicSite> resultList = db.getAllComics();
@@ -86,7 +87,8 @@ public class ComicDatabaseTest {
      */
     @Test
     public void test_LoadDatabaseReadsDateProperly() throws FileNotFoundException {
-        String dbFileName = baseDir + "fakedatabase.dat";
+//        String dbFileName = baseDir + "fakedatabase.dat";
+    	String dbFileName = "fakedatabase.dat";
         ComicDatabase db = new ComicDatabase(dbFileName);
         db.loadDatabase();
         java.util.Date testDate = DateUtils.createDate(2010, "APR", 14);

@@ -32,14 +32,13 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class LocalPrefReaderTest {
-	private String baseDir = "C:\\Users\\starkm3\\workspace\\BACON\\src\\test\\";
 
     /**
      * Tests whether getPreference returns null when the preference is not present.
      */
     @Test
     public void test_getPreferenceWithPreferenceNotPresent() {
-        LocalPrefReader.PREF_FILENAME = baseDir + "fakelocalpref.txt";
+        LocalPrefReader.PREF_FILENAME = "fakelocalpref.txt";
         LocalPrefReader lpr = new LocalPrefReader();
         String pref = lpr.getPreference("not present");
         assertNull(pref);
@@ -50,7 +49,7 @@ public class LocalPrefReaderTest {
      */
     @Test
     public void test_getPreferenceWithPreferencePresent() {
-        LocalPrefReader.PREF_FILENAME = baseDir + "fakelocalpref.txt";
+        LocalPrefReader.PREF_FILENAME = "fakelocalpref.txt";
         LocalPrefReader lpr = new LocalPrefReader();
         String pref = lpr.getPreference("SortStyle");
         assertEquals(pref, "A_TO_Z_ALPHABETICAL");
@@ -62,9 +61,9 @@ public class LocalPrefReaderTest {
      */
     @Test
     public void test_loadSavePreferences() {
-        LocalPrefReader.PREF_FILENAME = baseDir + "fakelocalpref.txt";
+        LocalPrefReader.PREF_FILENAME = "fakelocalpref.txt";
         LocalPrefReader lpr = new LocalPrefReader();
-        LocalPrefReader.PREF_FILENAME = baseDir + "fakelocalpref2.txt";
+        LocalPrefReader.PREF_FILENAME = "fakelocalpref2.txt";
         lpr.savePreferences();
         LocalPrefReader lpr2 = new LocalPrefReader();
         assertEquals(lpr.getPreference("SortStyle"), lpr2.getPreference("SortStyle"));
