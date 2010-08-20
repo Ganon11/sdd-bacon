@@ -1,0 +1,3 @@
+LastUpdated = 07_APR_2010
+SortStyle = A_TO_Z_ALPHABETICAL
+DataBaseFolder = C:/Users/starkm3/Documents/Comics
