@@ -45,7 +45,6 @@ import java.util.Set;
      */
     public LocalPrefReader() {
         preferences = new HashMap<String, String>();
-        loadPreferences();
     }
 
     /**
@@ -65,13 +64,7 @@ import java.util.Set;
                 preferences.put(elements[0], elements[2]);
             }
             prefFile.close();
-            if (preferences.get("SortStyle").equals("A_TO_Z_ALPHABETICAL")) {
-                ComicSite.sortMethod = SortMethod.SORT_BY_ALPHABETICAL;
-            } else if (preferences.get("SortStyle").equals("DATE_LAST_UPDATED")) {
-                ComicSite.sortMethod = SortMethod.SORT_BY_DATE;
-            } else if (preferences.get("SortStyle").equals("AUTHOR_NAME_A_TO_Z")) {
-                ComicSite.sortMethod = SortMethod.SORT_BY_AUTHOR;
-            }
+            ComicSite.sortMethod = SortMethod.getSortMethod(preferences.get("SortStyle"));
         } catch (java.io.FileNotFoundException e) {
             // Toss this up for GUI error display?
         } catch (NullPointerException e) {

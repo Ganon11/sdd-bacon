@@ -34,11 +34,12 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
  public class ComicDatabase {
-    private final String DATA_FILE;
-    private ArrayList<ComicSite> allComics;
+    private String fileName;
+    private List<ComicSite> allComics;
     private Date dateLoaded;
     private int current;
 
@@ -47,7 +48,7 @@ import java.util.Scanner;
      * location.
      */
     public ComicDatabase(String dataFileName) {
-        DATA_FILE = dataFileName;
+        fileName = dataFileName;
         allComics = new ArrayList<ComicSite>();
         current = -1;
     }
@@ -57,7 +58,7 @@ import java.util.Scanner;
      * location.
      */
     public ComicDatabase() {
-        DATA_FILE = ".datafile.dat";
+        fileName = ".datafile.dat";
         allComics = new ArrayList<ComicSite>();
         current = -1;
     }
@@ -76,7 +77,7 @@ import java.util.Scanner;
         current = 0;
         try {
             //System.out.println(DATA_FILE);
-            Scanner dataFile = new Scanner(new FileReader(DATA_FILE));
+            Scanner dataFile = new Scanner(new FileReader(fileName));
             String dateSaved = dataFile.nextLine();
             // The date is saved in format:
             // dow mon dd hh:mm:ss zzz yyyy
@@ -101,12 +102,9 @@ import java.util.Scanner;
                 String author = authorLine.substring(14);
                 String filePath = fileLine.substring(12);
                 String url = urlLine.substring(11);
-                //System.out.println(url);
                 int index = Integer.parseInt(indexLine.substring(13));
-                strip = new ComicStrip(BaconSystem.getImageN(url, index));
-                comic = new ComicSite(title, author, url, index);
-                strip.loadImage();
-                comic.setStrip(strip);
+                strip = createComicStrip(url, index);
+                comic = createComicSite(title, author, url, index, strip);
                 allComics.add(comic);
             }
         } catch (FileNotFoundException e) {
@@ -114,20 +112,15 @@ import java.util.Scanner;
         }
         sortComicList();
     }
-
+    
     /**
-     * Saves the current list of ComicSites to the data file specified by
-     * DATA_FILE.
-     *
-     * WARNING: Calling this method clears the list of comics in order to save
-     * the new list!
-     *
-     * @param newComics List of currently loaded/displayed ComicSites and ComicStrips.
+     * Saves the current list of ComicSites to the data file given.
+     * 
+     *  @param fileName Name of new file to write to.
      */
-    public void saveDatabase(ArrayList<ComicSite> newComics) {
-        //This should check if newComics is valid...
-        allComics = newComics;
-        this.saveDatabase();
+    public void saveDatabase(String fileName) {
+    	this.fileName = fileName;
+    	saveDatabase();
     }
 
     /**
@@ -136,7 +129,7 @@ import java.util.Scanner;
      */
     public void saveDatabase() {
         try {
-            FileWriter dataFile = new FileWriter(DATA_FILE);
+            FileWriter dataFile = new FileWriter(fileName);
             Date currentDate = DateUtils.getCurrentDate();
             // The date is saved in format:
             // dow mon dd hh:mm:ss zzz yyyy
@@ -163,7 +156,7 @@ import java.util.Scanner;
      *
      * @return An ArrayList of ComicSites, each of which has the proper image loaded.
      */
-    public ArrayList<ComicSite> getAllComics() {
+    public List<ComicSite> getAllComics() {
         return allComics;
     }
 
@@ -180,9 +173,12 @@ import java.util.Scanner;
      * Re-sorts the list, presumably after ComicSite's sortMethod has changed.
      */
     public void sortComicList() {
-        if (allComics.size() <= 1) return; // Lists of size 0 or 1 shouldn't be sorted
+        if (allComics.size() <= 1) {
+        	return; // Lists of size 0 or 1 shouldn't be sorted
+        }
+        // We want to keep the user at the comic they're currently viewing.
         ComicSite cs = getCurrentComic();
-        Collections.sort(allComics); // Yes, this is an "unchecked or unsafe operation"
+        Collections.sort(allComics);
         current = Collections.binarySearch(allComics, cs);
     }
 
@@ -193,9 +189,15 @@ import java.util.Scanner;
      * @return The next ComicSite in the list, circling to the first if necessary, or null if the list is empty.
      */
     public ComicSite getNextComic() {
-        if (allComics.isEmpty()) return null;
-        if (current < 0 || ++current >= allComics.size()) current = 0;
-        return allComics.get(current);
+        if (allComics.isEmpty()) {
+        	return null;
+        }
+        if (current < 0 || ++current >= allComics.size()) {
+        	current = 0;
+        }
+        ComicSite cs = allComics.get(current);
+        cs.getStrip().loadImage();
+        return cs;
     }
 
     /**
@@ -205,9 +207,15 @@ import java.util.Scanner;
      * @return The next Comic Site in the list, circling to the first if necessary, or null if the list is empty.
      */
     public ComicSite getPreviousComic() {
-        if (allComics.isEmpty()) return null;
-        if (current >= allComics.size() || --current < 0) current = allComics.size() - 1;
-        return allComics.get(current);
+        if (allComics.isEmpty()) {
+        	return null;
+        }
+        if (current >= allComics.size() || --current < 0) {
+        	current = allComics.size() - 1;
+        }
+        ComicSite cs = allComics.get(current);
+        cs.getStrip().loadImage();
+        return cs;
     }
 
     /**
@@ -216,8 +224,12 @@ import java.util.Scanner;
     * @return The current ComicSite in the list, or null if the list is empty.
     */
     public ComicSite getCurrentComic() {
-        if (allComics.isEmpty()) return null;
-        if (current < 0 || current >= allComics.size()) current = 0;
+        if (allComics.isEmpty()) {
+        	return null;
+        }
+        if (current < 0 || current >= allComics.size()) {
+        	current = 0;
+        }
         return allComics.get(current);
     }
 
@@ -257,5 +269,34 @@ import java.util.Scanner;
         if (current < 0 || current >= allComics.size()) current = 0;
         allComics.remove(current);
         if(current >= allComics.size()) current = 0;
+    }
+    
+    public boolean equals(Object o) {
+    	if (!(o instanceof ComicDatabase)) {
+    		return false;
+    	}
+    	
+    	ComicDatabase other = (ComicDatabase) o;
+    	for (ComicSite site : allComics) {
+    		if (!other.allComics.contains(site)) {
+    			return false;
+    		}
+    	}
+    	
+    	return true;
+    }
+    
+    // ========== helper methods ==========
+    
+    // Left at package visibility for testing
+    ComicStrip createComicStrip(String url, int index) {
+    	return new ComicStrip(BaconSystem.getImageN(url, index));
+    }
+
+    // Left at package visibility for testing
+    ComicSite createComicSite(String title, String author, String url, int index, ComicStrip strip) {
+    	ComicSite site = new ComicSite(title, author, url, index);
+    	site.setStrip(strip);
+    	return site;
     }
 }

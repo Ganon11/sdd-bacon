@@ -33,6 +33,9 @@ import java.util.Arrays;
 
 public class BrowserLaunch {
 
+	/**
+	 * Supported browsers.
+	 */
     private static final String[] browsers = { "google-chrome", "firefox", "opera",
         "konqueror", "epiphany", "seamonkey", "galeon", "kazehakase", "mozilla" };
 

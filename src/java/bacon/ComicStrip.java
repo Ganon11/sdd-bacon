@@ -81,12 +81,11 @@ public class ComicStrip {
         }
         else {
             try { 
-            filePath = ImageGrabber.getImage(new URL(filePath), dest);
+            	filePath = ImageGrabber.getImage(new URL(filePath), dest);
             } catch (java.net.MalformedURLException e) {
                 System.err.println("URL not properly formatted:" + filePath);
             }
-            if(filePath != null) return true;
-            else return false;
+            return filePath != null;
         }
     }
 
@@ -159,7 +158,7 @@ public class ComicStrip {
      *
      * @return true if the strip's image was specified by URL.
      */
-    public boolean isOnline() {
+    public boolean isUrl() {
         return isUrl;
     }
 }

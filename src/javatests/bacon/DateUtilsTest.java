@@ -25,29 +25,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package test;
-
-import bacon.DateUtils;
-import org.junit.*;
-import static org.junit.Assert.*;
+package bacon;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DateUtilsTest {
+import junit.framework.TestCase;
+
+public class DateUtilsTest extends TestCase {
+	/**
+	 * Tests whether getCurrentDate correctly fetches the current Date.
+	 */
+	public void test_getCurrentDate() {
+		long expected = new GregorianCalendar().getTime().getTime();
+		long actual = DateUtils.getCurrentDate().getTime();
+		assertTrue(expected <= actual);
+		long expected2 = new GregorianCalendar().getTime().getTime();
+		assertTrue(actual <= expected2);
+	}
+	
     /**
      * Tests whether createDate creates a correct date.
      */
-    @Test
     public void test_createDate() {
         Date testDay = DateUtils.createDate(1989, 4, 11);
         Date myBDay = new GregorianCalendar(1989, 4, 11).getTime();
         assertEquals(testDay, myBDay);
     }
+    
     /**
      * Tests whether createDate creates a correct date when given negative month values.
      */
-    @Test
     public void test_createDateWithNegativeValues() {
         Date testDay = DateUtils.createDate(1989, -4, 11);
         Date notMyBDay = new GregorianCalendar(1989, -4, 11).getTime();
@@ -57,7 +65,6 @@ public class DateUtilsTest {
     /**
      * Tests whether createDate creates a correct date, using the (int, String, int) function call.
      */
-    @Test
     public void test_createDateWithStringArg() {
         Date testDay = DateUtils.createDate(1989, "May", 11);
         Date myBDay = new GregorianCalendar(1989, 4, 11).getTime();
@@ -67,7 +74,6 @@ public class DateUtilsTest {
     /**
      * Tests whether createDate nulls its return value when given a bad month value.
      */
-    @Test
     public void test_createDateWithBadStringArg() {
         Date testDay = DateUtils.createDate(1989, "Funtober", 11);
         assertEquals(testDay, null);
@@ -76,7 +82,6 @@ public class DateUtilsTest {
     /**
      * Tests the monthStringToInteger method with various months.
      */
-     @Test
      public void test_monthStringToInteger() {
         String month = "Jan";
         int expectedValue = 0;
@@ -93,9 +98,8 @@ public class DateUtilsTest {
      }
      
      /**
-     * Tests the monthStringToInteger method with a nonexistant month.
+     * Tests the monthStringToInteger method with a nonexistent month.
      */
-     @Test
      public void test_monthStringToIntegerWithBadString() {
         String month = "Funtober";
         int expectedValue = -1;

@@ -25,21 +25,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package test;
+package bacon;
 
-import bacon.LocalPrefReader;
-import org.junit.*;
-import static org.junit.Assert.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class LocalPrefReaderTest {
+import junit.framework.TestCase;
+
+public class LocalPrefReaderTest extends TestCase {
+	private String FAKE_PREF_FILE = "fakelocalpref.txt";
+	private LocalPrefReader lpr;
+	
+	public void setUp() throws IOException {
+		LocalPrefReader.PREF_FILENAME = FAKE_PREF_FILE;
+		FileWriter file = new FileWriter(FAKE_PREF_FILE);
+		file.write("SortStyle = A_TO_Z_ALPHABETICAL\n" +
+				   "DataBaseFolder = C:\\Users\\starkm3\\workspace\\bacon\n");
+		file.close();
+	}
+	
+	public void tearDown() {
+		File file = new File(FAKE_PREF_FILE);
+		file.delete();
+	}
 
     /**
      * Tests whether getPreference returns null when the preference is not present.
      */
-    @Test
     public void test_getPreferenceWithPreferenceNotPresent() {
-        LocalPrefReader.PREF_FILENAME = "fakelocalpref.txt";
-        LocalPrefReader lpr = new LocalPrefReader();
+    	lpr = new LocalPrefReader();
         String pref = lpr.getPreference("not present");
         assertNull(pref);
     }
@@ -47,10 +62,9 @@ public class LocalPrefReaderTest {
     /**
      * Tests whether getPreference returns the correct value when present.
      */
-    @Test
     public void test_getPreferenceWithPreferencePresent() {
-        LocalPrefReader.PREF_FILENAME = "fakelocalpref.txt";
-        LocalPrefReader lpr = new LocalPrefReader();
+    	lpr = new LocalPrefReader();
+        lpr.loadPreferences();
         String pref = lpr.getPreference("SortStyle");
         assertEquals(pref, "A_TO_Z_ALPHABETICAL");
     }
@@ -59,13 +73,15 @@ public class LocalPrefReaderTest {
      * Tests whether savePreferences saves the data to a file in a fashion loadable
      * by loadPreferences with the same data.
      */
-    @Test
     public void test_loadSavePreferences() {
-        LocalPrefReader.PREF_FILENAME = "fakelocalpref.txt";
-        LocalPrefReader lpr = new LocalPrefReader();
+        lpr = new LocalPrefReader();
+        lpr.loadPreferences();
         LocalPrefReader.PREF_FILENAME = "fakelocalpref2.txt";
         lpr.savePreferences();
         LocalPrefReader lpr2 = new LocalPrefReader();
+        lpr2.loadPreferences();
         assertEquals(lpr.getPreference("SortStyle"), lpr2.getPreference("SortStyle"));
+        File fakeFile = new File("fakelocalpref2.txt");
+        fakeFile.delete();
     }
 }
