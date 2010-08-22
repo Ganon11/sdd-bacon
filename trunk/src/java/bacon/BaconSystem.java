@@ -29,7 +29,6 @@
 package bacon;
 
 import bacon.gui.MainFrame;
-import bacon.SwingInput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,12 +81,14 @@ public class BaconSystem {
                 }
             }
             lpr = new LocalPrefReader();
+            lpr.loadPreferences();
             lpr.setPreference("DataBaseFolder", locDb);
-            lpr.setPreference("SortStyle", "A_TO_Z_ALPHABETICAL");
+            lpr.setPreference("SortStyle", SortMethod.SORT_BY_ALPHABETICAL.toString());
             db = new ComicDatabase(locDb + File.separator + ".datafile.dat");
         } else {
             System.out.println("Not first run!  Getting DB pref");
             lpr = new LocalPrefReader();
+            lpr.loadPreferences();
             String fileLoc = lpr.getPreference("DataBaseFolder");
             if (fileLoc == null) {
                 // We has a problem. Better get that file again.

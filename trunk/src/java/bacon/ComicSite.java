@@ -161,21 +161,28 @@ public class ComicSite implements Comparable<ComicSite> {
     /**
      * Comparator. Uses whatever type is held in sortType to sort.
      * Currently returns 0 if SortMethod.SORT_BY_DATE is in effect.
+     * 
+     * @throws NullPointerException if sortMethod is null.
+     * @throws IllegalStateException if sortMethod is unrecognized.
      */
     public int compareTo(ComicSite cs) {
-        if (sortMethod == SortMethod.SORT_BY_ALPHABETICAL) {
-            int c = this.comicName.compareToIgnoreCase(cs.comicName);
+    	int c;
+    	if (sortMethod == null) {
+    		throw new NullPointerException("sortMethod cannot be null");
+    	}
+    	switch(sortMethod) {
+    	case SORT_BY_ALPHABETICAL:
+            c = this.comicName.compareToIgnoreCase(cs.comicName);
             return c != 0 ? c : this.comicAuthor.compareToIgnoreCase(cs.comicAuthor);
-        } else if (sortMethod == SortMethod.SORT_BY_AUTHOR) {
-            int c = this.comicAuthor.compareToIgnoreCase(cs.comicAuthor);
+    	case SORT_BY_AUTHOR:
+            c = this.comicAuthor.compareToIgnoreCase(cs.comicAuthor);
             return c != 0 ? c : this.comicName.compareToIgnoreCase(cs.comicName);
-        } else if (sortMethod == SortMethod.SORT_BY_DATE) {
+    	case SORT_BY_DATE:
             // We don't really have enough of a date infrastructure yet to write this
             return 0;
-        } else {
-            // Throw an exception?
-            return 0;
-        }
+        default:
+        	throw new IllegalStateException("sortMethod unrecognized");
+    	}
     }
 
     public boolean equals(Object o) {

@@ -28,7 +28,29 @@
 package bacon;
 
 public enum SortMethod {
-    SORT_BY_ALPHABETICAL,
-    SORT_BY_AUTHOR,
-    SORT_BY_DATE
+    SORT_BY_ALPHABETICAL("A_TO_Z_ALPHABETICAL"),
+    SORT_BY_AUTHOR("AUTHOR_NAME_A_TO_Z"),
+    SORT_BY_DATE("DATE_LAST_UPDATED");
+	
+	private String sortName;
+    
+    public static SortMethod getSortMethod(String sortString) {
+    	if (sortString.equalsIgnoreCase("A_TO_Z_ALPHABETICAL")) {
+    		return SORT_BY_ALPHABETICAL;
+    	} else if (sortString.equalsIgnoreCase("AUTHOR_NAME_A_TO_Z")) {
+    		return SORT_BY_AUTHOR;
+    	} else if (sortString.equalsIgnoreCase("DATE_LAST_UPDATED")) {
+    		return SORT_BY_DATE;
+    	} else {
+    		return null;
+    	}
+    }
+    
+    private SortMethod(String sortName) {
+    	this.sortName = sortName;
+    }
+    
+    public String toString() {
+    	return sortName;
+    }
 }
