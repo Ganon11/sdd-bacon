@@ -1,0 +1,1 @@
+Project BACON (Bringing All Comics Offline Now) brings the latest updates of your favorite webcomics right to your desktop, no matter your operating system. All you need is Java and a working internet connection!
